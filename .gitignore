@@ -1,0 +1,7 @@
+.DS_Store
+.claude/
+flowstate-app/.next/
+flowstate-app/node_modules/
+flowstate-app/.env
+flowstate-app/prisma/dev.db
+flowstate-app/prisma/dev.db-journal
