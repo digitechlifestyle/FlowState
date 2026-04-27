@@ -18,11 +18,19 @@ const MONTHS = ["January","February","March","April","May","June","July","August
 
 export default function CalendarPage() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [today, setToday] = useState<Date | null>(null);
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const now = new Date();
+    setCurrentDate(now);
+    setToday(now);
+  }, []);
+
   const fetchPosts = useCallback(async () => {
+    if (!currentDate) return;
     setLoading(true);
     const monthStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}`;
     const res = await fetch(`/api/posts?month=${monthStr}`);
@@ -33,8 +41,8 @@ export default function CalendarPage() {
 
   useEffect(() => { fetchPosts(); }, [fetchPosts]);
 
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
+  const year = currentDate?.getFullYear() ?? new Date().getFullYear();
+  const month = currentDate?.getMonth() ?? new Date().getMonth();
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -102,8 +110,7 @@ export default function CalendarPage() {
             {Array.from({ length: daysInMonth }).map((_, i) => {
               const day = i + 1;
               const dayPosts = getPostsForDay(day);
-              const today = new Date();
-              const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
+              const isToday = !!today && today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
               const isSelected = selectedDay?.getDate() === day && selectedDay?.getMonth() === month;
 
               return (

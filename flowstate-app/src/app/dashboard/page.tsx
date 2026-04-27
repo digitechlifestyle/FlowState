@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { PLANS } from "@/lib/utils";
+import Greeting from "@/components/dashboard/Greeting";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -39,9 +40,7 @@ export default async function DashboardPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white mb-1">
-          Good {getGreeting()}, {session!.user.name?.split(" ")[0] ?? "there"} 👋
-        </h1>
+        <Greeting name={session!.user.name?.split(" ")[0] ?? "there"} />
         <p className="text-[#8888aa]">Here&apos;s what&apos;s happening with your social presence today.</p>
       </div>
 
@@ -158,9 +157,3 @@ export default async function DashboardPage() {
   );
 }
 
-function getGreeting() {
-  const h = new Date().getHours();
-  if (h < 12) return "morning";
-  if (h < 18) return "afternoon";
-  return "evening";
-}

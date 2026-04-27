@@ -3,5 +3,9 @@
 flowstate-app/.next/
 flowstate-app/node_modules/
 flowstate-app/.env
+flowstate-app/.env.local
 flowstate-app/prisma/dev.db
 flowstate-app/prisma/dev.db-journal
+flowstate-app/dev.db
+flowstate-app/dev.db-journal
+rtk/
