@@ -36,6 +36,8 @@ export default function ComposePage() {
   const [scheduling, setScheduling] = useState(false);
   const [scheduledAt, setScheduledAt] = useState("");
   const [saved, setSaved] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishResults, setPublishResults] = useState<{ platform: string; success: boolean; error?: string }[]>([]);
   const [error, setError] = useState("");
 
   const togglePlatform = (id: string) => {
@@ -100,6 +102,45 @@ export default function ComposePage() {
       setError(e instanceof Error ? e.message : "Save failed");
     } finally {
       setScheduling(false);
+    }
+  }
+
+  async function handlePublishNow() {
+    if (!generatedContent || !selectedPlatforms.length) return;
+    setPublishing(true);
+    setPublishResults([]);
+    setError("");
+    try {
+      // Save post first
+      const saveRes = await fetch("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: generatedContent,
+          shortContent,
+          platforms: selectedPlatforms,
+          postType,
+          seoTitle,
+          seoDescription,
+          status: "published",
+        }),
+      });
+      const post = await saveRes.json();
+      if (!saveRes.ok) throw new Error(post.error ?? "Save failed");
+
+      // Publish to platforms
+      const pubRes = await fetch("/api/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId: post.id }),
+      });
+      const pubData = await pubRes.json();
+      if (!pubRes.ok) throw new Error(pubData.error ?? "Publish failed");
+      setPublishResults(pubData.results ?? []);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Publish failed");
+    } finally {
+      setPublishing(false);
     }
   }
 
@@ -416,9 +457,48 @@ export default function ComposePage() {
                 </div>
               )}
 
+              {/* Publish Now */}
+              <div className="glass rounded-2xl p-5 border border-purple-500/20">
+                <button
+                  onClick={handlePublishNow}
+                  disabled={publishing || !generatedContent || !selectedPlatforms.length}
+                  className="w-full py-3.5 rounded-xl gradient-bg text-white font-bold text-sm hover:opacity-90 transition-all disabled:opacity-50 mb-3"
+                >
+                  {publishing ? "Publishing..." : "🚀 Publish Now"}
+                </button>
+                {!selectedPlatforms.length && (
+                  <p className="text-xs text-amber-400/80 text-center">Select at least one platform above</p>
+                )}
+
+                {/* Publish results */}
+                {publishResults.length > 0 && (
+                  <div className="space-y-2 mt-3">
+                    {publishResults.map((r) => (
+                      <div
+                        key={r.platform}
+                        className={`flex items-start gap-2.5 px-3 py-2 rounded-lg text-xs ${
+                          r.success
+                            ? "bg-green-500/10 border border-green-500/20"
+                            : "bg-red-500/10 border border-red-500/20"
+                        }`}
+                      >
+                        <span>{r.success ? "✓" : "✗"}</span>
+                        <div>
+                          <span className={`font-medium capitalize ${r.success ? "text-green-400" : "text-red-400"}`}>
+                            {r.platform}
+                          </span>
+                          {r.error && <p className="text-[#8888aa] mt-0.5">{r.error}</p>}
+                          {r.success && <p className="text-green-400/70 mt-0.5">Published successfully</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Save / Schedule */}
               <div className="glass rounded-2xl p-5 border border-white/5">
-                <div className="text-xs text-[#8888aa] mb-3">Schedule (optional)</div>
+                <div className="text-xs text-[#8888aa] mb-3">Schedule for later (optional)</div>
                 <input
                   type="datetime-local"
                   value={scheduledAt}

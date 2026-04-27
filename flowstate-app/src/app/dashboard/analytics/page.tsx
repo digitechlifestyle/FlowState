@@ -1,17 +1,27 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { PLANS } from "@/lib/utils";
 
 export default async function AnalyticsPage() {
   const session = await auth();
   const userId = session!.user.id;
 
-  const [totalPosts, scheduledPosts, publishedPosts, draftPosts, platforms] = await Promise.all([
+  const thisMonth = new Date();
+  thisMonth.setDate(1);
+  thisMonth.setHours(0, 0, 0, 0);
+
+  const [totalPosts, scheduledPosts, publishedPosts, draftPosts, platforms, aiUsedThisMonth, user] = await Promise.all([
     prisma.post.count({ where: { userId } }),
     prisma.post.count({ where: { userId, status: "scheduled" } }),
     prisma.post.count({ where: { userId, status: "published" } }),
     prisma.post.count({ where: { userId, status: "draft" } }),
     prisma.connectedPlatform.findMany({ where: { userId, isActive: true } }),
+    prisma.post.count({ where: { userId, createdAt: { gte: thisMonth }, postType: { not: "social" } } }),
+    prisma.user.findUnique({ where: { id: userId } }),
   ]);
+
+  const plan = (user?.plan ?? "free") as keyof typeof PLANS;
+  const planData = PLANS[plan] ?? PLANS.free;
 
   const last30 = new Date();
   last30.setDate(last30.getDate() - 30);
@@ -37,10 +47,10 @@ export default async function AnalyticsPage() {
   recentPosts.forEach((p) => { byType[p.postType] = (byType[p.postType] ?? 0) + 1; });
 
   const stats = [
-    { label: "Total Posts", value: totalPosts, icon: "📝", color: "from-purple-500 to-purple-700" },
-    { label: "Published", value: publishedPosts, icon: "✅", color: "from-green-500 to-green-700" },
-    { label: "Scheduled", value: scheduledPosts, icon: "📅", color: "from-blue-500 to-blue-700" },
-    { label: "Drafts", value: draftPosts, icon: "📄", color: "from-gray-500 to-gray-700" },
+    { label: "Total Posts", value: totalPosts, icon: "📝", sub: null },
+    { label: "Published", value: publishedPosts, icon: "✅", sub: null },
+    { label: "Scheduled", value: scheduledPosts, icon: "📅", sub: null },
+    { label: "AI Credits", value: aiUsedThisMonth, icon: "🤖", sub: `of ${planData.aiCredits} this month` },
   ];
 
   return (
@@ -56,6 +66,15 @@ export default async function AnalyticsPage() {
             <div className="text-2xl mb-3">{s.icon}</div>
             <div className="text-3xl font-bold text-white mb-1">{s.value}</div>
             <div className="text-sm text-[#8888aa]">{s.label}</div>
+            {s.sub && <div className="text-xs text-[#666688] mt-1">{s.sub}</div>}
+            {s.label === "AI Credits" && (
+              <div className="mt-2 w-full bg-white/10 rounded-full h-1.5">
+                <div
+                  className="gradient-bg h-1.5 rounded-full"
+                  style={{ width: `${Math.min(100, (aiUsedThisMonth / planData.aiCredits) * 100)}%` }}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

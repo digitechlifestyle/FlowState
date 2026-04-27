@@ -7,12 +7,28 @@ export default async function BillingPage() {
   const session = await auth();
   const user = await prisma.user.findUnique({ where: { id: session!.user.id } });
 
+  const stripeReady = process.env.STRIPE_SECRET_KEY && !process.env.STRIPE_SECRET_KEY.includes("your-stripe");
+
   return (
     <div className="p-8 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white mb-1">Billing & Plans</h1>
         <p className="text-[#8888aa]">Manage your subscription and upgrade your plan.</p>
       </div>
+
+      {!stripeReady && (
+        <div className="mb-6 p-5 bg-amber-500/10 border border-amber-500/20 rounded-2xl">
+          <h3 className="text-amber-400 font-semibold mb-2">⚠️ Stripe not yet configured</h3>
+          <p className="text-amber-400/80 text-sm mb-3">To enable paid subscriptions, add your Stripe keys to <code className="bg-white/10 px-1 rounded">.env</code>:</p>
+          <ol className="space-y-1.5 text-sm text-amber-400/80">
+            <li className="flex gap-2"><span className="font-bold">1.</span> Go to <strong>dashboard.stripe.com</strong> → Developers → API Keys</li>
+            <li className="flex gap-2"><span className="font-bold">2.</span> Copy your Secret Key and Publishable Key into <code className="bg-white/10 px-1 rounded">.env</code></li>
+            <li className="flex gap-2"><span className="font-bold">3.</span> In Stripe: Products → Add product → create <strong>Pro ($29.99/mo)</strong> and <strong>Agency ($99.99/mo)</strong></li>
+            <li className="flex gap-2"><span className="font-bold">4.</span> Copy each Price ID (starts with <code className="bg-white/10 px-1 rounded">price_</code>) into <code className="bg-white/10 px-1 rounded">STRIPE_PRICE_PRO</code> and <code className="bg-white/10 px-1 rounded">STRIPE_PRICE_AGENCY</code></li>
+            <li className="flex gap-2"><span className="font-bold">5.</span> Set up a webhook at your domain → <code className="bg-white/10 px-1 rounded">/api/stripe/webhook</code> for <code className="bg-white/10 px-1 rounded">customer.subscription.*</code> events</li>
+          </ol>
+        </div>
+      )}
 
       {/* Current plan */}
       <div className="glass rounded-2xl p-6 border border-white/5 mb-6">
