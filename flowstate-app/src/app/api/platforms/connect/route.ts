@@ -15,7 +15,12 @@ function saveCredentials(
       return {
         accountName: `@${c.username.replace(/^@/, "").trim()}`,
         accountId: c.username.replace(/^@/, "").trim(),
-        tokenToStore: JSON.stringify({ apiKey: c.apiKey, apiSecret: c.apiSecret }),
+        tokenToStore: JSON.stringify({
+          apiKey: c.apiKey,
+          apiSecret: c.apiSecret,
+          accessToken: c.accessToken,
+          accessTokenSecret: c.accessTokenSecret,
+        }),
       };
 
     case "facebook":

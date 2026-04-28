@@ -35,17 +35,21 @@ type PlatformGuide = {
 const GUIDES: Record<string, PlatformGuide> = {
   twitter: {
     fields: [
-      { key: "username", label: "X Username", placeholder: "yourusername", help: "Without the @" },
-      { key: "apiKey", label: "API Key", placeholder: "xxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: 'Under "Consumer Keys"' },
-      { key: "apiSecret", label: "API Key Secret", placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: 'Under "Consumer Keys"' },
+      { key: "username", label: "X Username", placeholder: "yourusername", help: "Your X handle without the @" },
+      { key: "apiKey", label: "API Key", placeholder: "xxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: 'Under "Consumer Keys" section' },
+      { key: "apiSecret", label: "API Key Secret", placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: 'Under "Consumer Keys" section' },
+      { key: "accessToken", label: "Access Token", placeholder: "1234567890-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: 'Under "Authentication Tokens" — click the Generate button first' },
+      { key: "accessTokenSecret", label: "Access Token Secret", placeholder: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", type: "password", help: "Shown immediately after clicking Generate — copy it before leaving the page" },
     ],
     steps: [
       "Go to developer.twitter.com → your app → Keys and Tokens",
-      'Copy "API Key" and "API Key Secret" from Consumer Keys',
-      "Enter your X username (no @) above",
+      'Under "Consumer Keys" — copy your API Key and API Key Secret',
+      'Scroll down to "Authentication Tokens" — you will see a Generate button next to Access Token and Secret',
+      "Click Generate — it shows both tokens immediately. Copy them both now (they won't show again)",
+      'Go to App Settings → User authentication settings → set App permissions to "Read and Write"',
     ],
     docsUrl: "https://developer.twitter.com/en/portal/dashboard",
-    note: "Make sure your app has Read and Write permissions under App Settings.",
+    note: "The Generate button for Access Token is in the same Keys and Tokens page, below Consumer Keys. If you already clicked Generate before, click Regenerate to get new ones.",
   },
 
   instagram: {

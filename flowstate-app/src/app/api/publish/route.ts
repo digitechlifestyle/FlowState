@@ -1,6 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import crypto from "crypto";
+
+function buildOAuth1Header(
+  method: string,
+  url: string,
+  apiKey: string,
+  apiSecret: string,
+  accessToken: string,
+  accessTokenSecret: string
+): string {
+  const nonce = crypto.randomBytes(16).toString("hex");
+  const timestamp = Math.floor(Date.now() / 1000).toString();
+  const params: Record<string, string> = {
+    oauth_consumer_key: apiKey,
+    oauth_nonce: nonce,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: timestamp,
+    oauth_token: accessToken,
+    oauth_version: "1.0",
+  };
+  const sortedParams = Object.keys(params).sort()
+    .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join("&");
+  const baseString = [method.toUpperCase(), encodeURIComponent(url), encodeURIComponent(sortedParams)].join("&");
+  const signingKey = `${encodeURIComponent(apiSecret)}&${encodeURIComponent(accessTokenSecret)}`;
+  const signature = crypto.createHmac("sha1", signingKey).update(baseString).digest("base64");
+  params["oauth_signature"] = signature;
+  const header = Object.keys(params).sort()
+    .map((k) => `${encodeURIComponent(k)}="${encodeURIComponent(params[k])}"`).join(", ");
+  return `OAuth ${header}`;
+}
 
 type PlatformResult = {
   platform: string;
@@ -10,6 +40,32 @@ type PlatformResult = {
 };
 
 // ─── Platform publishers ─────────────────────────────────────────────────────
+
+async function publishToTwitter(
+  content: string,
+  tokenJson: string
+): Promise<PlatformResult> {
+  try {
+    const { apiKey, apiSecret, accessToken, accessTokenSecret } = JSON.parse(tokenJson);
+    if (!accessToken || !accessTokenSecret) {
+      return { platform: "twitter", success: false, error: "Access Token missing — reconnect X in Platforms and add all 4 credentials including Access Token and Secret" };
+    }
+    const url = "https://api.twitter.com/2/tweets";
+    const authHeader = buildOAuth1Header("POST", url, apiKey, apiSecret, accessToken, accessTokenSecret);
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: authHeader },
+      body: JSON.stringify({ text: content.slice(0, 280) }),
+    });
+    const data = await res.json();
+    if (!res.ok || data.errors) {
+      return { platform: "twitter", success: false, error: data.errors?.[0]?.message ?? data.detail ?? "Tweet failed" };
+    }
+    return { platform: "twitter", success: true, externalId: data.data?.id };
+  } catch (e) {
+    return { platform: "twitter", success: false, error: e instanceof Error ? e.message : "Unknown error" };
+  }
+}
 
 async function publishToBluesky(
   content: string,
@@ -278,7 +334,7 @@ export async function POST(req: NextRequest) {
       case "threads":    result = await publishToThreads(content, conn.accessToken); break;
       case "pinterest":  result = await publishToPinterest(content, conn.accessToken); break;
       case "twitter":
-        result = { platform: "twitter", success: false, error: "X/Twitter posting requires Access Token — reconnect in Platforms settings with all 4 credentials" };
+        result = await publishToTwitter(content, conn.accessToken);
         break;
       case "youtube":
         result = { platform: "youtube", success: false, error: "YouTube video uploads require OAuth — coming soon" };
