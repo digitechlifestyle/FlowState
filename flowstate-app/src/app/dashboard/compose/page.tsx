@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PLATFORMS } from "@/lib/utils";
@@ -22,6 +22,8 @@ export default function ComposePage() {
   const [postType, setPostType] = useState<PostType>("social");
   const [tone, setTone] = useState<Tone>("professional");
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [wpSites, setWpSites] = useState<{ id: string; siteName: string | null; siteUrl: string }[]>([]);
+  const [publishToWp, setPublishToWp] = useState(false);
   const [generatedContent, setGeneratedContent] = useState("");
   const [shortContent, setShortContent] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
@@ -40,11 +42,19 @@ export default function ComposePage() {
   const [publishResults, setPublishResults] = useState<{ platform: string; success: boolean; error?: string }[]>([]);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    fetch("/api/wordpress").then((r) => r.json()).then((d) => setWpSites(Array.isArray(d) ? d : []));
+  }, []);
+
   const togglePlatform = (id: string) => {
     setSelectedPlatforms((prev) =>
       prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
     );
   };
+
+  const allSelectedPlatforms = publishToWp
+    ? [...selectedPlatforms, "wordpress"]
+    : selectedPlatforms;
 
   async function handleGenerate() {
     if (!topic.trim()) return;
@@ -56,7 +66,7 @@ export default function ComposePage() {
       const res = await fetch("/api/ai/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, postType, tone, platforms: selectedPlatforms }),
+        body: JSON.stringify({ topic, postType, tone, platforms: allSelectedPlatforms }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -87,7 +97,7 @@ export default function ComposePage() {
         body: JSON.stringify({
           content: generatedContent,
           shortContent,
-          platforms: selectedPlatforms,
+          platforms: allSelectedPlatforms,
           postType,
           seoTitle,
           seoDescription,
@@ -106,7 +116,7 @@ export default function ComposePage() {
   }
 
   async function handlePublishNow() {
-    if (!generatedContent || !selectedPlatforms.length) return;
+    if (!generatedContent || !allSelectedPlatforms.length) return;
     setPublishing(true);
     setPublishResults([]);
     setError("");
@@ -118,7 +128,7 @@ export default function ComposePage() {
         body: JSON.stringify({
           content: generatedContent,
           shortContent,
-          platforms: selectedPlatforms,
+          platforms: allSelectedPlatforms,
           postType,
           seoTitle,
           seoDescription,
@@ -226,6 +236,25 @@ export default function ComposePage() {
                   </button>
                 ))}
               </div>
+              {/* WordPress sites */}
+              {wpSites.length > 0 && (
+                <div className="mt-2">
+                  <button
+                    onClick={() => setPublishToWp((v) => !v)}
+                    className={`w-full py-2 px-3 rounded-xl text-xs font-medium transition-all flex items-center gap-2 ${
+                      publishToWp ? "gradient-bg text-white" : "bg-white/5 text-[#8888aa] hover:text-white"
+                    }`}
+                  >
+                    <span>🌐</span>
+                    <span>WordPress — {wpSites.map((s) => s.siteName || s.siteUrl).join(", ")}</span>
+                  </button>
+                </div>
+              )}
+              {wpSites.length === 0 && (postType === "blog" || postType === "seo") && (
+                <a href="/dashboard/platforms" className="block mt-2 text-xs text-[#8888aa] hover:text-purple-400 transition-colors text-center py-1.5">
+                  + Connect WordPress to publish blogs directly →
+                </a>
+              )}
             </div>
           </div>
 
@@ -385,8 +414,8 @@ export default function ComposePage() {
                 </div>
               )}
 
-              {/* SEO panel */}
-              {(seoTitle || seoDescription || slug || secondaryKeywords.length > 0) && (
+              {/* SEO panel — always show for blog/seo types */}
+              {(postType === "blog" || postType === "seo") && (
                 <div className="glass rounded-2xl p-5 border border-purple-500/20 space-y-4">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-bold text-purple-400 uppercase tracking-wider">SEO Details</span>
@@ -461,12 +490,12 @@ export default function ComposePage() {
               <div className="glass rounded-2xl p-5 border border-purple-500/20">
                 <button
                   onClick={handlePublishNow}
-                  disabled={publishing || !generatedContent || !selectedPlatforms.length}
+                  disabled={publishing || !generatedContent || !allSelectedPlatforms.length}
                   className="w-full py-3.5 rounded-xl gradient-bg text-white font-bold text-sm hover:opacity-90 transition-all disabled:opacity-50 mb-3"
                 >
                   {publishing ? "Publishing..." : "🚀 Publish Now"}
                 </button>
-                {!selectedPlatforms.length && (
+                {!allSelectedPlatforms.length && (
                   <p className="text-xs text-amber-400/80 text-center">Select at least one platform above</p>
                 )}
 

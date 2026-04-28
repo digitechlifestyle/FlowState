@@ -78,6 +78,10 @@ Return this exact JSON (escape all quotes inside strings with backslash):
 {
   "content": "full blog post in markdown",
   "shortContent": "2–3 sentence social teaser that creates curiosity without spoiling everything",
+  "seoTitle": "compelling title under 60 characters including the primary keyword",
+  "seoDescription": "meta description 150-160 characters with keyword and clear reason to click",
+  "slug": "url-slug-here",
+  "primaryKeyword": "main keyword for this post",
   "imageSuggestions": ["brief description of image 1", "brief description of image 2", "brief description of image 3"]
 }`;
 
