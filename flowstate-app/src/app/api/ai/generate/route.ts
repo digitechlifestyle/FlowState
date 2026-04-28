@@ -15,7 +15,9 @@ export async function POST(req: NextRequest) {
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-  const plan = user.plan as keyof typeof PLANS;
+  const ownerEmail = process.env.OWNER_EMAIL;
+  const isOwner = ownerEmail && user.email === ownerEmail;
+  const plan = (isOwner ? "agency" : user.plan) as keyof typeof PLANS;
   const planData = PLANS[plan] ?? PLANS.free;
 
   const thisMonth = new Date();
