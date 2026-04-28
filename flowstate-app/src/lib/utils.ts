@@ -53,14 +53,14 @@ export const PLANS = {
 export type Plan = keyof typeof PLANS;
 
 export const PLATFORMS = [
-  { id: "twitter", name: "X (Twitter)", color: "#1D9BF0", icon: "𝕏" },
-  { id: "instagram", name: "Instagram", color: "#E4405F", icon: "📸" },
-  { id: "facebook", name: "Facebook", color: "#1877F2", icon: "f" },
-  { id: "linkedin", name: "LinkedIn", color: "#0A66C2", icon: "in" },
-  { id: "tiktok", name: "TikTok", color: "#FF0050", icon: "♪" },
-  { id: "youtube", name: "YouTube", color: "#FF0000", icon: "▶" },
-  { id: "threads", name: "Threads", color: "#000000", icon: "@" },
-  { id: "bluesky", name: "Bluesky", color: "#0085FF", icon: "🦋" },
-  { id: "pinterest", name: "Pinterest", color: "#E60023", icon: "P" },
-  { id: "reddit", name: "Reddit", color: "#FF4500", icon: "👾" },
+  { id: "twitter",   name: "X (Twitter)", shortName: "Twitter",   color: "#1D9BF0", icon: "𝕏"  },
+  { id: "instagram", name: "Instagram",   shortName: "Instagram", color: "#E4405F", icon: "📷"  },
+  { id: "facebook",  name: "Facebook",    shortName: "Facebook",  color: "#1877F2", icon: "👥"  },
+  { id: "linkedin",  name: "LinkedIn",    shortName: "LinkedIn",  color: "#0A66C2", icon: "💼"  },
+  { id: "tiktok",    name: "TikTok",      shortName: "TikTok",    color: "#FF0050", icon: "🎵"  },
+  { id: "youtube",   name: "YouTube",     shortName: "YouTube",   color: "#FF0000", icon: "▶️"  },
+  { id: "threads",   name: "Threads",     shortName: "Threads",   color: "#6B6B6B", icon: "🧵"  },
+  { id: "bluesky",   name: "Bluesky",     shortName: "Bluesky",   color: "#0085FF", icon: "🦋"  },
+  { id: "pinterest", name: "Pinterest",   shortName: "Pinterest", color: "#E60023", icon: "📌"  },
+  { id: "reddit",    name: "Reddit",      shortName: "Reddit",    color: "#FF4500", icon: "🔴"  },
 ] as const;

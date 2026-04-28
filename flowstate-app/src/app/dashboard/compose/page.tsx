@@ -232,7 +232,7 @@ export default function ComposePage() {
                     }`}
                   >
                     <span>{p.icon}</span>
-                    <span className="truncate">{p.name.split(" ")[0]}</span>
+                    <span className="truncate">{p.shortName}</span>
                   </button>
                 ))}
               </div>
