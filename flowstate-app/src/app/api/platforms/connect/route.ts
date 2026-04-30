@@ -4,10 +4,54 @@ import { prisma } from "@/lib/prisma";
 
 type SaveResult = { accountName: string; accountId: string; tokenToStore: string };
 
-function saveCredentials(
-  platform: string,
-  credentials: Record<string, string>
-): SaveResult {
+// Instagram: auto-discover the Business Account ID from the access token
+async function resolveInstagram(accessToken: string, username: string): Promise<SaveResult> {
+  // Try as a Page Access Token first: GET /me?fields=instagram_business_account,name
+  const pageRes = await fetch(
+    `https://graph.facebook.com/v20.0/me?fields=instagram_business_account,name,id&access_token=${accessToken}`
+  );
+  const pageData = await pageRes.json();
+
+  if (pageData.instagram_business_account?.id) {
+    return {
+      accountName: `@${username.replace(/^@/, "")}`,
+      accountId: pageData.instagram_business_account.id,
+      tokenToStore: JSON.stringify({ accessToken, accountId: pageData.instagram_business_account.id }),
+    };
+  }
+
+  // Try as a User Access Token: GET /me/accounts to get pages
+  const accountsRes = await fetch(
+    `https://graph.facebook.com/v20.0/me/accounts?fields=access_token,name,instagram_business_account&access_token=${accessToken}`
+  );
+  const accountsData = await accountsRes.json();
+
+  if (accountsData.error) {
+    throw new Error(accountsData.error.message ?? "Invalid access token");
+  }
+
+  const pages: Array<{ id: string; name: string; access_token: string; instagram_business_account?: { id: string } }> =
+    accountsData.data ?? [];
+
+  for (const page of pages) {
+    if (page.instagram_business_account?.id) {
+      return {
+        accountName: `@${username.replace(/^@/, "")}`,
+        accountId: page.instagram_business_account.id,
+        tokenToStore: JSON.stringify({
+          accessToken: page.access_token ?? accessToken,
+          accountId: page.instagram_business_account.id,
+        }),
+      };
+    }
+  }
+
+  throw new Error(
+    "No Instagram Business or Creator account found linked to this token. Make sure your Instagram account is a Professional account connected to a Facebook Page."
+  );
+}
+
+function saveCredentials(platform: string, credentials: Record<string, string>): SaveResult {
   const c = credentials;
 
   switch (platform) {
@@ -28,13 +72,6 @@ function saveCredentials(
         accountName: c.pageName || "Facebook Page",
         accountId: c.pageId,
         tokenToStore: JSON.stringify({ accessToken: c.accessToken, pageId: c.pageId }),
-      };
-
-    case "instagram":
-      return {
-        accountName: `@${c.username.replace(/^@/, "").trim()}`,
-        accountId: c.accountId,
-        tokenToStore: JSON.stringify({ accessToken: c.accessToken, accountId: c.accountId }),
       };
 
     case "linkedin":
@@ -101,22 +138,31 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { accountName, accountId, tokenToStore } = saveCredentials(platform, credentials);
+    let result: SaveResult;
+
+    if (platform === "instagram") {
+      if (!credentials.accessToken) {
+        return NextResponse.json({ error: "Access token required" }, { status: 400 });
+      }
+      result = await resolveInstagram(credentials.accessToken, credentials.username || "instagram");
+    } else {
+      result = saveCredentials(platform, credentials);
+    }
 
     const record = await prisma.connectedPlatform.upsert({
       where: { userId_platform: { userId: session.user.id, platform } },
       create: {
         userId: session.user.id,
         platform,
-        accountName,
-        accountId,
-        accessToken: tokenToStore,
+        accountName: result.accountName,
+        accountId: result.accountId,
+        accessToken: result.tokenToStore,
         isActive: true,
       },
       update: {
-        accountName,
-        accountId,
-        accessToken: tokenToStore,
+        accountName: result.accountName,
+        accountId: result.accountId,
+        accessToken: result.tokenToStore,
         isActive: true,
       },
     });

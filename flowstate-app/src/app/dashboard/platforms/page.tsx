@@ -55,17 +55,18 @@ const GUIDES: Record<string, PlatformGuide> = {
   instagram: {
     fields: [
       { key: "username", label: "Instagram Username", placeholder: "yourusername", help: "Your Instagram handle without @" },
-      { key: "accessToken", label: "Access Token", placeholder: "EAABsbCS...", type: "password", help: "Long-lived token from Meta Developer" },
-      { key: "accountId", label: "Instagram Business Account ID", placeholder: "17841234567890", help: "From Graph API: /{page-id}?fields=instagram_business_account" },
+      { key: "accessToken", label: "Page Access Token", placeholder: "EAABsbCS...", type: "password", help: "FlowState will automatically find your Instagram Business Account ID" },
     ],
     steps: [
-      "Connect your Instagram Professional account to a Facebook Page",
-      "Go to developers.facebook.com → Graph API Explorer",
-      "Generate a Page Access Token with instagram_content_publish scope",
-      "Call /{page-id}?fields=instagram_business_account to get your Account ID",
+      "Your Instagram must be a Professional account (Business or Creator) — switch in the Instagram app under Settings → Account",
+      "Connect it to a Facebook Page: Instagram app → Settings → Account → Linked Accounts → Facebook",
+      "Go to developers.facebook.com → Tools → Graph API Explorer",
+      'Click "Generate Access Token" — select your Facebook Page from the dropdown',
+      'Add these permissions: pages_show_list, instagram_basic, instagram_content_publish, pages_read_engagement',
+      "Copy the token and paste it above — FlowState will find your Instagram account automatically",
     ],
     docsUrl: "https://developers.facebook.com/tools/explorer",
-    note: "Requires a Business or Creator account linked to a Facebook Page.",
+    note: "The token must be for the Facebook Page that is linked to your Instagram. If your Instagram is not showing up, make sure it is a Professional account and linked to a Facebook Page.",
   },
 
   facebook: {
