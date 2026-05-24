@@ -3,6 +3,8 @@ import { getArticles } from "@/lib/articles";
 import { pillarPages } from "@/lib/pages";
 import { site } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = ["", "tool-directory", "blog", "newsletter", "resources", "about", "contact", "privacy-policy", "affiliate-disclosure", "terms"];
   const pageRoutes = pillarPages.map((page) => page.slug);

@@ -1,0 +1,42 @@
+export const pillarPages = [
+  {
+    slug: "ai-tools",
+    title: "AI Tools",
+    eyebrow: "AI stack",
+    description: "Compare AI assistants, writing tools, research systems, creative apps, and agent platforms for practical digital work.",
+    bullets: ["AI tool reviews", "Prompt workflows", "Business use cases", "Creator systems"],
+    category: "AI Tools",
+  },
+  {
+    slug: "digital-wealth",
+    title: "Digital Wealth",
+    eyebrow: "Money systems",
+    description: "Practical guides to finance apps, crypto wallets, digital assets, and the infrastructure of modern money.",
+    bullets: ["Finance apps", "Digital assets", "Wallet safety", "Wealth automation"],
+    category: "Digital Wealth",
+  },
+  {
+    slug: "automation",
+    title: "Automation",
+    eyebrow: "Workflows",
+    description: "No-code automations, AI agents, and repeatable systems that save time across business and personal operations.",
+    bullets: ["No-code tools", "AI agents", "Workflow maps", "Time-saving systems"],
+    category: "Automation",
+  },
+  {
+    slug: "smart-lifestyle",
+    title: "Smart Lifestyle",
+    eyebrow: "Connected living",
+    description: "Smart home, productivity, digital wellness, and lifestyle technology for a more capable everyday setup.",
+    bullets: ["Smart home guides", "Personal tech", "Productivity", "Digital wellness"],
+    category: "Smart Lifestyle",
+  },
+  {
+    slug: "make-money-online",
+    title: "Make Money Online",
+    eyebrow: "Digital income",
+    description: "Build affiliate, product, content, and service businesses with realistic systems and durable traffic channels.",
+    bullets: ["Affiliate marketing", "Passive income", "Creator offers", "Online business"],
+    category: "Make Money Online",
+  },
+];

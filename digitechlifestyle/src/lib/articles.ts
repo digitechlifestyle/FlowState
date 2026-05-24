@@ -33,7 +33,7 @@ type WPCategory = {
 async function getCategories(): Promise<Record<number, string>> {
   try {
     const res = await fetch(`${WP_API}/categories?per_page=50`, {
-      next: { revalidate: 3600 },
+      cache: "force-cache",
     });
     const cats: WPCategory[] = await res.json();
     return Object.fromEntries(cats.map((c) => [c.id, c.name]));
@@ -71,7 +71,7 @@ export async function getArticles(): Promise<Article[]> {
     const [postsRes, categories] = await Promise.all([
       fetch(
         `${WP_API}/posts?per_page=100&status=publish&_fields=slug,title,excerpt,content,date,categories,sticky`,
-        { next: { revalidate: 3600 } }
+        { cache: "force-cache" }
       ),
       getCategories(),
     ]);
@@ -90,7 +90,7 @@ export async function getArticle(slug: string): Promise<Article | undefined> {
     const [postsRes, categories] = await Promise.all([
       fetch(
         `${WP_API}/posts?slug=${encodeURIComponent(slug)}&status=publish`,
-        { next: { revalidate: 3600 } }
+        { cache: "force-cache" }
       ),
       getCategories(),
     ]);
