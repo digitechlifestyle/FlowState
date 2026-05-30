@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "mkdir -p out"
   publish = "out"
 
 # Cache static WordPress assets aggressively — prevents 429 from flooding 206789
