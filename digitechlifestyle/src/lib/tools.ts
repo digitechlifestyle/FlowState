@@ -76,4 +76,13 @@ export const tools: Tool[] = [
     pricing: "Free and paid plans",
     href: "/blog/ai-for-content-creators",
   },
+  {
+    name: "DeepSeek",
+    category: "AI Assistant",
+    description: "High-performance AI reasoning and chat from China's DeepSeek lab — competitive with GPT-4 class models at a fraction of the cost.",
+    bestFor: "Cost-effective AI reasoning",
+    pricing: "Free and paid plans",
+    href: "https://www.deepseek.com/en/",
+    featured: true,
+  },
 ];

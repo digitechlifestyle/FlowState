@@ -17,16 +17,16 @@ type FeatureCard = {
 };
 
 const stats = [
-  { label: "Launch guides", value: "20" },
-  { label: "Core categories", value: "7" },
-  { label: "Tool picks", value: "8" },
+  { label: "Articles published", value: "100+" },
+  { label: "In crypto since", value: "2017" },
+  { label: "Financial advice given", value: "Zero" },
 ];
 
 const featureCards: FeatureCard[] = [
-  { title: "AI", text: "Find tools that earn their place in your workflow.", Icon: Bot },
-  { title: "Wealth", text: "Track apps, wallets, assets, and digital money shifts.", Icon: CircleDollarSign },
-  { title: "Automation", text: "Replace repetitive work with practical systems.", Icon: Gauge },
-  { title: "Lifestyle", text: "Upgrade daily living with useful connected tech.", Icon: Sparkles },
+  { title: "Crypto", text: "Bitcoin, Ethereum, DeFi, and the UK tax angle — explained plainly.", Icon: CircleDollarSign },
+  { title: "AI Tools", text: "Honest reviews of AI tools that actually earn their place.", Icon: Bot },
+  { title: "Exchange Reviews", text: "Unbiased comparisons of UK crypto exchanges and wallets.", Icon: Gauge },
+  { title: "Breaking News", text: "What's happening in crypto and AI, without the hype.", Icon: Sparkles },
 ];
 
 export default async function Home() {
@@ -43,17 +43,17 @@ export default async function Home() {
               {site.tagline}
             </p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.95] tracking-normal text-white md:text-7xl">
-              Build a richer, faster, smarter digital life.
+              Make sense of crypto, AI, and the digital world.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-              DigitechLifestyle is an SEO-ready publishing platform for AI tools, automation systems, digital wealth, online income, and smart living.
+              Educational guides, honest reviews, and breaking news — from an independent writer who&apos;s been in crypto since 2017. No hype. No financial advice. Just clarity.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/blog" className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 text-sm font-bold text-slate-950">
-                Read launch guides <ArrowRight size={18} />
+                Read the blog <ArrowRight size={18} />
               </Link>
-              <Link href="/tool-directory" className="inline-flex h-12 items-center justify-center rounded-lg border border-white/10 px-5 text-sm font-bold text-white">
-                Explore tools
+              <Link href="/blog?category=Reviews" className="inline-flex h-12 items-center justify-center rounded-lg border border-white/10 px-5 text-sm font-bold text-white">
+                Exchange reviews
               </Link>
             </div>
             <div className="mt-10 grid gap-3 sm:grid-cols-3">

@@ -1,30 +1,23 @@
 export const site = {
-  name: "DigitechLifestyle",
-  tagline: "The Future of Digital Living, Wealth, AI & Automation.",
+  name: "DigiTech Lifestyle",
+  tagline: "Crypto, AI & Digital Lifestyle — Independent. Honest. UK-focused.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://digitechlifestyle.com",
   description:
-    "Modern guides, tools, and digital products for AI workflows, online income, automation, digital wealth, and smarter connected living.",
+    "Educational guides, honest reviews, and breaking news on crypto, AI, and digital lifestyle. Independent writing from a crypto enthusiast since 2017.",
   email: "hello@digitechlifestyle.com",
 };
 
 export const navItems = [
-  { label: "AI Tools", href: "/ai-tools" },
-  { label: "Digital Wealth", href: "/digital-wealth" },
-  { label: "Automation", href: "/automation" },
-  { label: "Smart Lifestyle", href: "/smart-lifestyle" },
-  { label: "Make Money Online", href: "/make-money-online" },
-  { label: "Tools", href: "/tool-directory" },
   { label: "Blog", href: "/blog" },
+  { label: "Crypto", href: "/blog?category=Crypto" },
+  { label: "AI", href: "/blog?category=AI" },
+  { label: "Reviews", href: "/blog?category=Reviews" },
 ];
 
 export const categories = [
-  "AI Tools",
-  "Digital Wealth",
-  "Automation",
-  "Smart Lifestyle",
-  "Make Money Online",
-  "Productivity",
-  "Web3",
+  "Crypto",
+  "AI",
+  "Reviews",
 ] as const;
 
 export type Category = (typeof categories)[number];

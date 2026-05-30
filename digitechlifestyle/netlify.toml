@@ -1,12 +1,6 @@
 [build]
-  command = "mkdir -p out"
+  command = "npm run build"
   publish = "out"
-
-# Cache static WordPress assets aggressively — prevents 429 from flooding 206789
-[[headers]]
-  for = "/wp-content/*"
-  [headers.values]
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
 
 [[headers]]
   for = "/*.css"
@@ -18,17 +12,10 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# Prevent Netlify from caching proxy responses (avoids stale redirect loops)
-[[headers]]
-  for = "/"
-  [headers.values]
-    Cache-Control = "no-store"
-
 [[redirects]]
-  from = "/"
-  to = "https://digitechlifestyle-com-206789.hostingersite.com/"
-  status = 200
-  force = true
+  from = "/privacy-policy/"
+  to = "/privacy-policy"
+  status = 301
 
 [[redirects]]
   from = "/news"
@@ -44,4 +31,3 @@
   from = "/*"
   to = "https://digitechlifestyle-com-206789.hostingersite.com/:splat"
   status = 200
-  force = true
