@@ -1,127 +1,197 @@
 import Link from "next/link";
-import { ArrowRight, Bot, CircleDollarSign, Gauge, Sparkles } from "lucide-react";
-import { AdSlot } from "@/components/AdSlot";
-import { AffiliateCta } from "@/components/AffiliateCta";
-import { ArticleCard } from "@/components/ArticleCard";
-import { NewsletterForm } from "@/components/NewsletterForm";
-import { ToolCard } from "@/components/ToolCard";
 import { getArticles } from "@/lib/articles";
-import { pillarPages } from "@/lib/pages";
-import { site } from "@/lib/site";
-import { tools } from "@/lib/tools";
+import type { Article } from "@/lib/articles";
 
-type FeatureCard = {
-  title: string;
-  text: string;
-  Icon: typeof Bot;
-};
-
-const stats = [
-  { label: "Articles published", value: "100+" },
-  { label: "In crypto since", value: "2017" },
-  { label: "Financial advice given", value: "Zero" },
+const TOPICS = [
+  { label: "Bitcoin & Crypto",        href: "/blog?category=Cryptocurrencies" },
+  { label: "XRP & Ripple",            href: "/blog?category=XRP" },
+  { label: "Artificial Intelligence", href: "/blog?category=AI" },
+  { label: "DeFi & Blockchain",       href: "/blog?category=DeFi" },
+  { label: "Exchange Reviews",        href: "/blog?category=Reviews" },
+  { label: "Crypto Tools",            href: "/blog?category=Wallets" },
 ];
 
-const featureCards: FeatureCard[] = [
-  { title: "Crypto", text: "Bitcoin, Ethereum, DeFi, and the UK tax angle — explained plainly.", Icon: CircleDollarSign },
-  { title: "AI Tools", text: "Honest reviews of AI tools that actually earn their place.", Icon: Bot },
-  { title: "Exchange Reviews", text: "Unbiased comparisons of UK crypto exchanges and wallets.", Icon: Gauge },
-  { title: "Breaking News", text: "What's happening in crypto and AI, without the hype.", Icon: Sparkles },
+const EXPLORE = [
+  { label: "Crypto Guides",      href: "/blog?category=Cryptocurrencies" },
+  { label: "AI & Technology",    href: "/blog?category=AI" },
+  { label: "Exchange Reviews",   href: "/blog?category=Reviews" },
+  { label: "Digital Tools",      href: "/free-tools" },
+  { label: "Latest News",        href: "/news" },
+  { label: "About Joe",          href: "/about" },
 ];
+
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function tagClass(category: string) {
+  const c = category.toLowerCase();
+  if (c.includes("crypto") || c.includes("bitcoin") || c.includes("xrp") || c.includes("defi") || c.includes("blockchain")) return "tag-crypto";
+  if (c.includes("ai") || c.includes("artificial")) return "tag-ai";
+  if (c.includes("review")) return "tag-review";
+  if (c.includes("news")) return "tag-news";
+  return "tag-default";
+}
+
+function ArticleRowItem({ article }: { article: Article }) {
+  return (
+    <div className="article-row">
+      <div>
+        <div className="article-row-meta">
+          <span className={`tag ${tagClass(article.category)}`}>{article.category}</span>
+          <span className="meta-date">{fmtDate(article.date)}{article.readingTime ? ` · ${article.readingTime}` : ""}</span>
+        </div>
+        <h3><Link href={`/blog/${article.slug}`}>{article.title}</Link></h3>
+        <div className="article-row-author">Joe Robertson</div>
+      </div>
+      {article.image && (
+        <div className="article-row-thumb">
+          <img src={article.image} alt={article.title} loading="lazy" />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default async function Home() {
   const articles = await getArticles();
-  const featuredArticles = articles.filter((article) => article.featured).slice(0, 3);
-  const featuredTools = tools.filter((tool) => tool.featured);
+  const [featured, ...rest] = articles;
+  const latest = rest.slice(0, 8);
 
   return (
-    <main>
-      <section className="container py-12 md:py-20">
-        <div className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
-          <div>
-            <p className="inline-flex rounded-full border border-[rgba(33,214,164,0.35)] bg-[rgba(33,214,164,0.08)] px-4 py-2 text-sm font-semibold text-[var(--accent)]">
-              {site.tagline}
-            </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.95] tracking-normal text-white md:text-7xl">
-              Make sense of crypto, AI, and the digital world.
+    <main style={{ paddingBottom: "48px" }}>
+      <div className="wrap">
+        {/* Hero — 2-column */}
+        <section className="home-hero">
+          <div className="home-hero-content">
+            <div className="home-hero-eyebrow">Connecting Technology, Innovation &amp; Everyday Life</div>
+            <h1>
+              Make sense of crypto,<br />
+              AI, and the digital world.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-              Educational guides, honest reviews, and breaking news — from an independent writer who&apos;s been in crypto since 2017. No hype. No financial advice. Just clarity.
+            <p className="home-hero-sub">
+              Educational guides, honest reviews, and breaking news — from an
+              independent writer who&apos;s been in crypto since 2017. No hype.
+              No financial advice. Just clarity.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/blog" className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 text-sm font-bold text-slate-950">
-                Read the blog <ArrowRight size={18} />
-              </Link>
-              <Link href="/blog?category=Reviews" className="inline-flex h-12 items-center justify-center rounded-lg border border-white/10 px-5 text-sm font-bold text-white">
-                Exchange reviews
-              </Link>
+            <div className="home-hero-actions">
+              <Link href="/blog" className="btn-primary">Read the Blog →</Link>
+              <Link href="/blog?category=Reviews" className="btn-secondary">Exchange Reviews</Link>
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {stats.map((stat) => (
-                <div key={stat.label} className="surface rounded-lg p-4">
-                  <div className="text-2xl font-black text-white">{stat.value}</div>
-                  <div className="text-sm text-[var(--muted)]">{stat.label}</div>
+          </div>
+
+          {/* Stats — right column */}
+          <div className="home-stats-col">
+            <div className="stat-item">
+              <span className="stat-num">100+</span>
+              <span className="stat-label">Articles published</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-num">2017</span>
+              <span className="stat-label">Covering crypto since</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-num">100%</span>
+              <span className="stat-label">Educational, not advice</span>
+            </div>
+          </div>
+        </section>
+
+        {/* FREE FOR READERS */}
+        <div className="free-strip">
+          <div className="free-strip-label">Free for readers</div>
+          <div className="free-strip-title">
+            6 free AI tools most people don&apos;t know exist — no paid plans needed.{" "}
+            <Link href="/free-tools" style={{ color: "var(--amber)" }}>Get the free list →</Link>
+          </div>
+          <div className="topic-links">
+            <span style={{ fontSize: "11px", color: "var(--muted)", fontWeight: 600 }}>Topics:</span>
+            {TOPICS.map((t) => (
+              <Link key={t.href} href={t.href} className="topic-link">{t.label}</Link>
+            ))}
+          </div>
+        </div>
+
+        {/* FEATURED + sidebar */}
+        {featured && (
+          <div className="content-grid" style={{ marginTop: "36px" }}>
+            <div>
+              <div className="section-title">Featured</div>
+              <div className="featured-article">
+                <div className="featured-meta">
+                  <span className={`tag ${tagClass(featured.category)}`}>{featured.category}</span>
+                  <span className="meta-date">{fmtDate(featured.date)}</span>
                 </div>
-              ))}
+                <h2><Link href={`/blog/${featured.slug}`}>{featured.title}</Link></h2>
+                <p className="excerpt">{featured.description}</p>
+                <Link href={`/blog/${featured.slug}`} className="read-more-link">Read more →</Link>
+              </div>
+
+              {/* LATEST */}
+              <div className="section-title" style={{ marginTop: "28px" }}>Latest</div>
+              <div className="article-list">
+                {latest.map((article) => (
+                  <ArticleRowItem key={article.slug} article={article} />
+                ))}
+              </div>
             </div>
+
+            {/* Sidebar */}
+            <aside className="sidebar">
+              <div className="disclaimer-box">
+                <div className="disclaimer-box-header">🔒 Educational only</div>
+                <p>
+                  Everything on DigiTech Lifestyle is for informational purposes.
+                  Not financial advice. Crypto involves significant risk — always
+                  do your own research.
+                </p>
+              </div>
+
+              <div className="sidebar-widget">
+                <div className="section-title" style={{ marginBottom: "8px" }}>Explore</div>
+                <div className="explore-list">
+                  {EXPLORE.map((item) => (
+                    <Link key={item.href} href={item.href} className="explore-link">
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="sidebar-widget">
+                <div className="section-title" style={{ marginBottom: "8px" }}>Follow Us</div>
+                <div className="follow-list">
+                  {[
+                    { name: "YouTube",    href: "https://www.youtube.com/@digitechlifestyle" },
+                    { name: "X / Twitter", href: "https://x.com/DigiTechLife" },
+                    { name: "Facebook",   href: "https://www.facebook.com/digitechlifestyle" },
+                  ].map((s) => (
+                    <div key={s.name} className="follow-row">
+                      <span>{s.name}</span>
+                      <a href={s.href} className="follow-btn" target="_blank" rel="noopener">Follow</a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <p className="sidebar-disclaimer">
+                Some links are affiliate links. We may earn a commission at no extra cost to you. This never influences our editorial stance.
+              </p>
+            </aside>
           </div>
-          <aside className="grid gap-4">
-            <AdSlot label="right sidebar" className="min-h-72" />
-            <NewsletterForm compact />
-          </aside>
-        </div>
-      </section>
+        )}
 
-      <section className="container py-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {featureCards.map(({ title, text, Icon }) => (
-            <div key={title} className="surface rounded-lg p-5">
-              <Icon className="text-[var(--accent)]" size={24} />
-              <h2 className="mt-4 text-xl font-semibold text-white">{title}</h2>
-              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{text}</p>
-            </div>
-          ))}
+        {/* Newsletter */}
+        <div className="newsletter-strip">
+          <h2>Stay ahead of the market — free</h2>
+          <p>Join 4,200+ readers getting weekly crypto, DeFi, blockchain and AI insights every Thursday. No spam.</p>
+          <form className="newsletter-form" action="/newsletter" method="GET">
+            <input type="email" name="email" placeholder="Enter your email address" required autoComplete="email" />
+            <button type="submit">Join free</button>
+          </form>
+          <p style={{ fontSize: "11px", color: "var(--muted)", margin: 0 }}>Free forever. No spam. Unsubscribe any time.</p>
         </div>
-      </section>
-
-      <section className="container py-10">
-        <div className="mb-6 flex items-end justify-between gap-5">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Featured articles</p>
-            <h2 className="mt-2 text-3xl font-bold text-white">Launch reading list</h2>
-          </div>
-          <Link href="/blog" className="hidden text-sm font-semibold text-[var(--accent)] sm:inline-flex">View all</Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {featuredArticles.map((article) => <ArticleCard key={article.slug} article={article} />)}
-        </div>
-      </section>
-
-      <section className="container py-10">
-        <AffiliateCta />
-      </section>
-
-      <section className="container py-10">
-        <div className="mb-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Featured tools</p>
-          <h2 className="mt-2 text-3xl font-bold text-white">Start with these platforms</h2>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {featuredTools.map((tool) => <ToolCard key={tool.name} tool={tool} />)}
-        </div>
-      </section>
-
-      <section className="container py-10">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-          {pillarPages.map((page) => (
-            <Link key={page.slug} href={`/${page.slug}`} className="surface rounded-lg p-5 hover:border-[rgba(98,168,255,0.45)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-2)]">{page.eyebrow}</p>
-              <h2 className="mt-3 text-xl font-semibold text-white">{page.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{page.description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
+      </div>
     </main>
   );
 }

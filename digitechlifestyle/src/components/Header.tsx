@@ -1,36 +1,90 @@
+"use client";
+
 import Link from "next/link";
-import { Menu, Search } from "lucide-react";
-import { navItems, site } from "@/lib/site";
-import { AdSlot } from "./AdSlot";
+import { useEffect, useState } from "react";
+
+const NAV = [
+  { label: "Blog",          href: "/blog",                              external: false },
+  { label: "Tools",         href: "/tool-directory",                    external: false },
+  { label: "Free AI Tools", href: "/free-tools",                        external: false },
+  { label: "News",          href: "/news",                              external: false },
+  { label: "Reviews",       href: "/blog?category=Reviews",             external: false },
+  { label: "Videos",        href: "https://www.youtube.com/@digitechlifestyle", external: true },
+  { label: "About",         href: "/about",                             external: false },
+  { label: "Contact",       href: "/contact",                           external: false },
+  { label: "Admin",         href: "https://digitechlifestyle-com-206789.hostingersite.com/wp-admin/", external: true },
+];
+
+type Coin = { symbol: string; price: number; change: number };
+
+const DEFAULT_COINS = ["BTC","ETH","USDT","BNB","SOL","XRP","USDC","ADA","AVAX","DOGE","TRX","DOT","LINK","MATIC","SHIB","UNI","ATOM","LTC","BCH","TON"];
+
+function useTicker() {
+  const [coins, setCoins] = useState<Coin[]>(
+    DEFAULT_COINS.map((s) => ({ symbol: s, price: 0, change: 0 }))
+  );
+
+  useEffect(() => {
+    const fetch_ = () =>
+      fetch("/.netlify/functions/prices")
+        .then((r) => r.json())
+        .then((arr: Array<{ symbol: string; price: number; change: number }>) => {
+          if (Array.isArray(arr)) setCoins(arr);
+        })
+        .catch(() => {});
+    fetch_();
+    const id = setInterval(fetch_, 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  return coins;
+}
+
+function fmt(price: number, symbol: string) {
+  if (!price) return "—";
+  if (symbol === "XRP" || symbol === "ADA") return `$${price.toFixed(4)}`;
+  if (symbol === "BNB" || symbol === "SOL") return `$${price.toFixed(2)}`;
+  return `$${price.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+}
 
 export function Header() {
+  const coins = useTicker();
+
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#05070b]/88 backdrop-blur-xl">
-      <div className="container">
-        <AdSlot label="header" className="my-3 min-h-16" />
-        <div className="flex min-h-20 items-center justify-between gap-5">
-          <Link href="/" className="min-w-0">
-            <span className="block text-xl font-black tracking-tight text-white">{site.name}</span>
-            <span className="hidden text-xs text-[var(--muted)] sm:block">Digital Living, Wealth, AI & Automation</span>
+    <header className="site-header">
+      {/* Crypto ticker — marquee */}
+      <div className="ticker-bar" aria-hidden="true">
+        <div className="ticker-track">
+          {[...coins, ...coins].map((c, i) => (
+            <div key={`${c.symbol}-${i}`} className="ticker-item">
+              <span className="ticker-coin">{c.symbol}</span>
+              <span className="ticker-price">{fmt(c.price, c.symbol)}</span>
+              {c.change !== 0 && (
+                <span className={c.change >= 0 ? "ticker-up" : "ticker-down"}>
+                  {c.change >= 0 ? "+" : ""}{c.change.toFixed(2)}%
+                </span>
+              )}
+              <span style={{ color: "var(--line)", marginLeft: 4 }}>·</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main nav */}
+      <div className="wrap">
+        <div className="header-inner">
+          <Link href="/" className="site-logo">
+            <span className="logo-badge">DL</span>
+            Digi<span className="logo-accent">Tech</span>Lifestyle
           </Link>
-          <nav className="hidden items-center gap-5 text-sm text-slate-300 lg:flex">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="transition hover:text-white">
-                {item.label}
-              </Link>
+
+          <nav className="site-nav">
+            {NAV.map((item) => (
+              item.external
+                ? <a key={item.href} href={item.href} target="_blank" rel="noopener">{item.label}</a>
+                : <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <Link href="/newsletter" className="hidden rounded-lg bg-white px-4 py-2 text-sm font-bold text-slate-950 sm:inline-flex">
-              Join
-            </Link>
-            <button className="rounded-lg border border-white/10 p-2 text-slate-300" aria-label="Search">
-              <Search size={20} />
-            </button>
-            <button className="rounded-lg border border-white/10 p-2 text-slate-300 lg:hidden" aria-label="Open menu">
-              <Menu size={20} />
-            </button>
-          </div>
         </div>
       </div>
     </header>

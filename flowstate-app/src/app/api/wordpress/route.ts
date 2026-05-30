@@ -19,33 +19,62 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "All fields required" }, { status: 400 });
   }
 
-  const cleanUrl = siteUrl.replace(/\/$/, "");
+  const cleanUrl = siteUrl.replace(/\/$/, "").replace(/\/wp-json.*$/, "");
 
+  // Check REST API is reachable first
   try {
-    const token = Buffer.from(`${username}:${appPassword}`).toString("base64");
+    const pingRes = await fetch(`${cleanUrl}/wp-json/wp/v2`, { signal: AbortSignal.timeout(10000) });
+    if (!pingRes.ok) {
+      return NextResponse.json({ error: `WordPress REST API not reachable at ${cleanUrl}/wp-json/wp/v2 — make sure your site URL is correct and the REST API is enabled.` }, { status: 400 });
+    }
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ error: `Cannot reach ${cleanUrl} — check the URL is correct and the site is online. (${msg})` }, { status: 400 });
+  }
+
+  // Now check credentials
+  try {
+    const token = Buffer.from(`${username}:${appPassword.replace(/\s/g, "")}`).toString("base64");
     const res = await fetch(`${cleanUrl}/wp-json/wp/v2/users/me`, {
       headers: { Authorization: `Basic ${token}` },
+      signal: AbortSignal.timeout(10000),
     });
 
+    if (res.status === 401) {
+      return NextResponse.json({ error: "Username or Application Password is incorrect. Make sure you generated an Application Password in WordPress → Users → Profile, not your login password." }, { status: 400 });
+    }
+
     if (!res.ok) {
-      return NextResponse.json({ error: "Could not connect to WordPress site. Check your credentials." }, { status: 400 });
+      const body = await res.text();
+      return NextResponse.json({ error: `WordPress returned ${res.status}: ${body.slice(0, 200)}` }, { status: 400 });
     }
 
     const wpUser = await res.json();
+
+    // Check for duplicate
+    const existing = await prisma.wordpressSite.findFirst({ where: { userId: session.user.id, siteUrl: cleanUrl } });
+    if (existing) {
+      const updated = await prisma.wordpressSite.update({
+        where: { id: existing.id },
+        data: { username, appPassword: appPassword.replace(/\s/g, ""), siteName: wpUser.name ?? cleanUrl, isActive: true },
+      });
+      return NextResponse.json(updated, { status: 200 });
+    }
 
     const site = await prisma.wordpressSite.create({
       data: {
         userId: session.user.id,
         siteUrl: cleanUrl,
         username,
-        appPassword,
+        appPassword: appPassword.replace(/\s/g, ""),
         siteName: wpUser.name ?? cleanUrl,
         isActive: true,
       },
     });
 
     return NextResponse.json(site, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to connect. Ensure WordPress REST API is enabled." }, { status: 500 });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ error: `Connection failed: ${msg}` }, { status: 500 });
   }
 }

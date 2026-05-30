@@ -1,46 +1,61 @@
 import Link from "next/link";
-import { navItems, site } from "@/lib/site";
-import { AdSlot } from "./AdSlot";
+import { site } from "@/lib/site";
 
-const legalLinks = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Affiliate Disclosure", href: "/affiliate-disclosure" },
-  { label: "Terms", href: "/terms" },
-  { label: "Contact", href: "/contact" },
+const NAV = [
+  { label: "Blog",           href: "/blog" },
+  { label: "Free AI Tools",  href: "/free-tools" },
+  { label: "News",           href: "/news" },
+  { label: "Reviews",        href: "/blog?category=Reviews" },
+  { label: "About",          href: "/about" },
+  { label: "Contact",        href: "/contact" },
+];
+
+const LEGAL = [
+  { label: "Privacy Policy",      href: "/privacy-policy" },
+  { label: "Affiliate Disclosure",href: "/affiliate-disclosure" },
+  { label: "Terms",               href: "/terms" },
 ];
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-white/10">
-      <div className="container py-10">
-        <AdSlot label="footer" className="mb-8" />
-        <div className="grid gap-8 md:grid-cols-[1.2fr_1fr_1fr]">
+    <footer className="site-footer">
+      <div className="wrap">
+        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr", gap: "32px", marginBottom: "24px" }}>
           <div>
-            <h2 className="text-xl font-black text-white">{site.name}</h2>
-            <p className="mt-3 max-w-sm text-sm leading-6 text-[var(--muted)]">{site.description}</p>
+            <div style={{ fontFamily: "Sora, sans-serif", fontWeight: 900, fontSize: "17px", letterSpacing: "-0.02em", marginBottom: "10px" }}>
+              Digi<span style={{ color: "var(--blue)" }}>Tech</span> Lifestyle
+            </div>
+            <p style={{ fontSize: "13px", color: "var(--muted)", lineHeight: 1.6, maxWidth: "320px", margin: 0 }}>
+              {site.description}
+            </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">Explore</h3>
-            <div className="mt-4 grid gap-2 text-sm text-slate-400">
-              {navItems.slice(0, 6).map((item) => (
-                <Link key={item.href} href={item.href} className="hover:text-white">
-                  {item.label}
-                </Link>
+            <div className="section-title" style={{ marginBottom: "12px" }}>Explore</div>
+            <div style={{ display: "grid", gap: "6px" }}>
+              {NAV.map((item) => (
+                <Link key={item.href} href={item.href} style={{ fontSize: "13px", color: "var(--muted)" }}
+                  className="hover:text-white transition-colors">{item.label}</Link>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">Company</h3>
-            <div className="mt-4 grid gap-2 text-sm text-slate-400">
-              {legalLinks.map((item) => (
-                <Link key={item.href} href={item.href} className="hover:text-white">
-                  {item.label}
-                </Link>
+            <div className="section-title" style={{ marginBottom: "12px" }}>Legal</div>
+            <div style={{ display: "grid", gap: "6px" }}>
+              {LEGAL.map((item) => (
+                <Link key={item.href} href={item.href} style={{ fontSize: "13px", color: "var(--muted)" }}
+                  className="hover:text-white transition-colors">{item.label}</Link>
               ))}
             </div>
           </div>
         </div>
-        <p className="mt-10 text-xs text-slate-500">© 2026 {site.name}. Informational content only. Not financial advice.</p>
+        <div className="footer-inner" style={{ paddingTop: "16px", borderTop: "1px solid var(--line)" }}>
+          <span>© 2026 DigiTech Lifestyle. Informational content only. Not financial advice.</span>
+          <div className="footer-links">
+            <a href="https://x.com/DigiTechLife" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="https://www.youtube.com/@digitechlifestyle" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://www.facebook.com/digitechlifestyle" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
       </div>
     </footer>
   );

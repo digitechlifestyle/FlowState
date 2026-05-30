@@ -9,3 +9,6 @@ flowstate-app/prisma/dev.db-journal
 flowstate-app/dev.db
 flowstate-app/dev.db-journal
 rtk/
+
+# Local Netlify folder
+.netlify

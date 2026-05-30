@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { StandardPage } from "@/components/StandardPage";
-import { FreeToolsGate } from "@/components/FreeToolsGate";
+import { FreeToolsClient } from "@/components/FreeToolsClient";
 
 export const metadata: Metadata = {
   title: "6 Free AI Tools You Should Be Using",
@@ -15,7 +15,7 @@ export default function FreeToolsPage() {
       title="6 Free AI Tools You Should Be Using"
       description="No paid plans. No credit cards. Enter your email and I'll unlock the full list — plus send you more useful finds as I come across them."
     >
-      <FreeToolsGate />
+      <FreeToolsClient />
     </StandardPage>
   );
 }

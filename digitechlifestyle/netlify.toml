@@ -2,32 +2,32 @@
   command = "npm run build"
   publish = "out"
 
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
+[build.environment]
+  NEXT_PUBLIC_SITE_URL = "https://www.digitechlifestyle.com"
 
 [[headers]]
-  for = "/*.js"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "no-store, no-cache, must-revalidate"
+    X-Frame-Options = "DENY"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
-  from = "/privacy-policy/"
-  to = "/privacy-policy"
-  status = 301
+  from = "/wp-json/*"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-json/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
-  from = "/news"
-  to = "/category/news/"
-  status = 301
-
-[[redirects]]
-  from = "/news/"
-  to = "/category/news/"
-  status = 301
+  from = "/wp-admin/*"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-admin/:splat"
+  status = 302
 
 [[redirects]]
   from = "/*"
-  to = "https://digitechlifestyle-com-206789.hostingersite.com/:splat"
+  to = "/index.html"
   status = 200
