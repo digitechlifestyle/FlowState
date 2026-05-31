@@ -54,62 +54,16 @@ function estimateReadingTime(html: string): string {
   return `${Math.max(1, Math.ceil(words / 200))} min read`;
 }
 
-// Pool of varied fallback images per category — selected deterministically by slug
-const FALLBACK_POOLS: Record<string, string[]> = {
-  Crypto: [
-    "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&q=80",
-    "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=800&q=80",
-    "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80",
-    "https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=800&q=80",
-    "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&q=80",
-    "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/6771985/pexels-photo-6771985.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=800&q=80",
-  ],
-  AI: [
-    "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80",
-    "https://images.unsplash.com/photo-1655720031554-a929595ffad7?w=800&q=80",
-    "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80",
-    "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
-    "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
-    "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/8728382/pexels-photo-8728382.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?w=800&q=80",
-  ],
-  Reviews: [
-    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
-    "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800&q=80",
-    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
-    "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/5053740/pexels-photo-5053740.jpeg?w=800&q=80",
-  ],
-  default: [
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-    "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80",
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
-    "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?w=800&q=80",
-    "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?w=800&q=80",
-  ],
-};
-
-function slugHash(slug: string): number {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  return h;
-}
-
-function getFallbackImage(slug: string, category: string): string {
-  const pool = FALLBACK_POOLS[category] ?? FALLBACK_POOLS.default;
-  return pool[slugHash(slug) % pool.length];
+// Unique fallback per article: picsum.photos uses slug as seed → deterministic, never duplicates
+function getFallbackImage(slug: string): string {
+  return `https://picsum.photos/seed/${encodeURIComponent(slug)}/800/500`;
 }
 
 function wpToArticle(post: WPPost, categories: Record<number, string>): Article {
   const rawExcerpt = stripHtml(post.excerpt?.rendered || "").slice(0, 160);
   const category = categories[post.categories?.[0]] || "AI Tools";
   const wpImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-  const image = wpImage || getFallbackImage(post.slug, category);
+  const image = wpImage || getFallbackImage(post.slug);
   return {
     slug: post.slug,
     title: post.title.rendered,
