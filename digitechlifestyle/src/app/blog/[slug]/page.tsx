@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AdSlot } from "@/components/AdSlot";
+import { SidebarAds } from "@/components/SidebarAds";
 import { AffiliateCta } from "@/components/AffiliateCta";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { getArticle, getArticles, markdownToHtml } from "@/lib/articles";
@@ -62,13 +62,17 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             <h1 className="mt-5 text-4xl font-black leading-tight text-white md:text-6xl">{article.title}</h1>
             <p className="mt-5 text-lg leading-8 text-[var(--muted)]">{article.description}</p>
           </div>
+          {/* Mobile-only ad — sidebar is hidden below fold on small screens */}
+          <div className="mt-6 lg:hidden">
+            <SidebarAds />
+          </div>
           <div className="prose-content mt-8" dangerouslySetInnerHTML={{ __html: markdownToHtml(article.content) }} />
           <div className="mt-10">
             <AffiliateCta />
           </div>
         </article>
         <aside className="grid content-start gap-4">
-          <AdSlot label="right sidebar" className="min-h-72" />
+          <SidebarAds />
           <NewsletterForm compact />
         </aside>
       </div>
