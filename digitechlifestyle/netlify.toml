@@ -16,17 +16,49 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# WordPress REST API — proxied for build-time fetches
 [[redirects]]
   from = "/wp-json/*"
   to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-json/:splat"
   status = 200
   force = true
 
+# WordPress Admin — 302 sends browser directly to correct install
+# (avoids Netlify proxy Host-header routing to wrong Hostinger install)
+[[redirects]]
+  from = "/wp-admin"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-admin/"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/wp-admin/*"
   to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-admin/:splat"
   status = 302
+  force = true
 
+# WordPress Login — WP redirects login to www.digitechlifestyle.com/wp-login.php
+# We 302 that on to 206789 so the browser stays on the correct install
+[[redirects]]
+  from = "/wp-login"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-login.php"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-login.php"
+  status = 302
+  force = true
+
+# WordPress cron
+[[redirects]]
+  from = "/wp-cron.php"
+  to = "https://digitechlifestyle-com-206789.hostingersite.com/wp-cron.php"
+  status = 302
+  force = true
+
+# SPA catch-all — all other routes serve the Next.js app
 [[redirects]]
   from = "/*"
   to = "/index.html"

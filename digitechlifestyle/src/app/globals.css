@@ -1,6 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
+/* ─── Sidebar ad animations ──────────────────────────────── */
+@keyframes dtl-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes dtl-glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+@keyframes dtl-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+.dtl-partner:hover > div { filter: brightness(1.15); }
+
 :root {
   color-scheme: dark;
 
