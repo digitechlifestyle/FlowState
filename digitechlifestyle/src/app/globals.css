@@ -14,7 +14,7 @@
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-4px); }
 }
-.dtl-partner:hover > div { filter: brightness(1.15); }
+.dtl-featured:hover > div { filter: brightness(1.15); }
 
 :root {
   color-scheme: dark;
@@ -52,8 +52,8 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: "Manrope", system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -600,30 +600,44 @@ h1, h2, h3, h4, h5 {
 .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
 .footer-links a:hover { color: var(--fg); }
 
+/* ─── Blog two-col layout ────────────────────────────────── */
+@media (min-width: 1024px) {
+  .blog-two-col {
+    grid-template-columns: 1fr 320px !important;
+  }
+}
+
 /* ─── Prose / article body ───────────────────────────────── */
 .prose-content {
-  color: oklch(85% 0.010 70);
-  line-height: 1.82;
-  font-size: 16px;
-  max-width: 68ch;
+  color: oklch(88% 0.010 70);
+  line-height: 1.85;
+  font-size: 18px;
+  max-width: 75ch;
 }
-.prose-content h2 { margin: 2.2rem 0 0.7rem; font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--fg); }
-.prose-content h3 { margin: 1.6rem 0 0.5rem; font-size: 1.18rem; color: var(--fg); }
-.prose-content p, .prose-content ul, .prose-content ol { margin: 0.85rem 0; }
+.prose-content h2 { margin: 2.4rem 0 0.8rem; font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--fg); }
+.prose-content h3 { margin: 1.8rem 0 0.6rem; font-size: 1.3rem; color: var(--fg); }
+.prose-content p, .prose-content ul, .prose-content ol { margin: 1rem 0; }
 .prose-content ul, .prose-content ol { padding-left: 1.35rem; }
-.prose-content li { margin-bottom: 0.3rem; }
+.prose-content li { margin-bottom: 0.4rem; }
 .prose-content a { color: var(--amber); }
 .prose-content a:hover { text-decoration: underline; }
 .prose-content blockquote {
   border-left: none;
-  padding: 13px 16px;
+  padding: 16px 20px;
   background: var(--bg-card);
   border-radius: var(--radius);
   font-style: italic;
   color: var(--muted);
-  margin: 1.2rem 0;
+  margin: 1.4rem 0;
 }
 .prose-content strong { color: var(--fg); font-weight: 700; }
+.prose-content img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
 
 /* ─── Ad / surface ───────────────────────────────────────── */
 .ad-slot {

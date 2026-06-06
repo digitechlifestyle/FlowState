@@ -49,9 +49,10 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
   };
 
   return (
-    <main className="container py-12">
+    <main className="container py-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+      <div style={{ display: "grid", gap: "32px", gridTemplateColumns: "1fr", alignItems: "start" }}
+           className="blog-two-col">
         <article>
           <div className="surface rounded-lg p-6 md:p-10">
             <div className="flex flex-wrap gap-2 text-sm text-slate-400">
@@ -59,19 +60,15 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               <span>{article.readingTime}</span>
               <span>{new Date(article.date).toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" })}</span>
             </div>
-            <h1 className="mt-5 text-4xl font-black leading-tight text-white md:text-6xl">{article.title}</h1>
-            <p className="mt-5 text-lg leading-8 text-[var(--muted)]">{article.description}</p>
-          </div>
-          {/* Mobile-only ad — sidebar is hidden below fold on small screens */}
-          <div className="mt-6 lg:hidden">
-            <SidebarAds />
+            <h1 className="mt-5 text-4xl font-black leading-tight text-white md:text-5xl">{article.title}</h1>
+            <p className="mt-5 text-xl leading-8 text-[var(--muted)]">{article.description}</p>
           </div>
           <div className="prose-content mt-8" dangerouslySetInnerHTML={{ __html: markdownToHtml(article.content) }} />
           <div className="mt-10">
             <AffiliateCta />
           </div>
         </article>
-        <aside className="grid content-start gap-4">
+        <aside style={{ position: "sticky", top: "80px", display: "grid", gap: "16px", alignContent: "start" }}>
           <SidebarAds />
           <NewsletterForm compact />
         </aside>
