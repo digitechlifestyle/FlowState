@@ -164,6 +164,68 @@ export function SidebarAds() {
         </div>
       </Link>
 
+      {/* Promo image card — Secure Your Crypto */}
+      <a
+        href="https://shop.ledger.com/?referral_code=FN50B8J0VZNVR"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
+      >
+        <div style={{
+          position: "relative",
+          borderRadius: "12px",
+          overflow: "hidden",
+          background: "oklch(5% 0.01 220)",
+          boxShadow: "0 0 0 1px rgba(59,130,246,0.3)",
+        }}>
+          <img
+            src="/images/generated/secure_your_crypto_future.png"
+            alt="Secure Your Crypto — top hardware wallets and security tools"
+            loading="lazy"
+            decoding="async"
+            style={{ width: "100%", maxHeight: "120px", objectFit: "cover", objectPosition: "center", display: "block" }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, oklch(4% 0.01 220 / 0.9) 100%)" }} />
+          <div style={{ position: "absolute", bottom: "10px", left: "12px", right: "12px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+            <div>
+              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, color: "#60a5fa", letterSpacing: "0.08em", textTransform: "uppercase" }}>Hardware Wallets</p>
+              <p style={{ margin: "2px 0 0", fontSize: "12px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Secure Your Crypto</p>
+            </div>
+            <span style={{ background: "#3b82f6", color: "#fff", fontWeight: 800, fontSize: "10px", padding: "4px 9px", borderRadius: "6px", whiteSpace: "nowrap" }}>Shop Ledger ↗</span>
+          </div>
+        </div>
+      </a>
+
+      {/* Promo image card — Trade Smarter */}
+      <a
+        href="/blog?category=Reviews"
+        style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
+      >
+        <div style={{
+          position: "relative",
+          borderRadius: "12px",
+          overflow: "hidden",
+          background: "oklch(5% 0.02 60)",
+          boxShadow: "0 0 0 1px rgba(247,166,0,0.3)",
+        }}>
+          <img
+            src="/images/generated/smarter_trading_with_digi_tech.png"
+            alt="Trade Smarter — compare crypto exchanges and trading platforms"
+            loading="lazy"
+            decoding="async"
+            style={{ width: "100%", maxHeight: "120px", objectFit: "cover", objectPosition: "center top", display: "block" }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, oklch(4% 0.02 60 / 0.9) 100%)" }} />
+          <div style={{ position: "absolute", bottom: "10px", left: "12px", right: "12px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+            <div>
+              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Exchange Reviews</p>
+              <p style={{ margin: "2px 0 0", fontSize: "12px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Trade Smarter</p>
+            </div>
+            <span style={{ background: "var(--amber)", color: "oklch(8% 0.015 60)", fontWeight: 800, fontSize: "10px", padding: "4px 9px", borderRadius: "6px", whiteSpace: "nowrap" }}>Compare ↗</span>
+          </div>
+        </div>
+      </a>
+
     <div style={{
       background: "var(--bg-card)",
       border: "1px solid var(--line)",
