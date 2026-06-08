@@ -1,20 +1,97 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
-/* ─── Sidebar ad animations ──────────────────────────────── */
+/* ─── Brand image animations ─────────────────────────────── */
+
+/* Slow parallax zoom on hero images */
+@keyframes dtl-slow-zoom {
+  0%   { transform: scale(1.00); }
+  100% { transform: scale(1.06); }
+}
+
+/* Neon amber glow pulse */
+@keyframes dtl-glow-amber {
+  0%, 100% { box-shadow: 0 0 12px oklch(73% 0.17 78 / 0.25), 0 0 32px oklch(73% 0.17 78 / 0.10); }
+  50%       { box-shadow: 0 0 24px oklch(73% 0.17 78 / 0.50), 0 0 64px oklch(73% 0.17 78 / 0.20); }
+}
+
+/* Neon purple glow pulse */
+@keyframes dtl-glow-purple {
+  0%, 100% { box-shadow: 0 0 12px oklch(48% 0.22 290 / 0.30), 0 0 32px oklch(48% 0.22 290 / 0.12); }
+  50%       { box-shadow: 0 0 28px oklch(48% 0.22 290 / 0.55), 0 0 72px oklch(48% 0.22 290 / 0.25); }
+}
+
+/* Floating particles drift upward */
+@keyframes dtl-particle-up {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-80px) translateX(8px); opacity: 0; }
+}
+
+/* Orbital ring slow rotation */
+@keyframes dtl-orbit {
+  0%   { transform: rotate(0deg)   scaleY(0.35); }
+  100% { transform: rotate(360deg) scaleY(0.35); }
+}
+
+/* Float bob */
+@keyframes dtl-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* CTA pulse ring */
+@keyframes dtl-ring-pulse {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  100% { transform: scale(1.6);  opacity: 0; }
+}
+
+/* Shimmer sweep */
 @keyframes dtl-shimmer {
   0%   { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  100% { transform: translateX(200%); }
 }
+
+/* Glow pulse (generic) */
 @keyframes dtl-glowPulse {
   0%, 100% { opacity: 0.5; }
   50%       { opacity: 1; }
 }
-@keyframes dtl-float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-4px); }
-}
+
 .dtl-featured:hover > div { filter: brightness(1.15); }
+
+/* ─── Brand image utility classes ────────────────────────── */
+
+/* Hero image wrapper — zoom on load */
+.dtl-hero-img {
+  animation: dtl-slow-zoom 12s ease-in-out alternate infinite;
+  will-change: transform;
+}
+
+/* Amber glow border */
+.dtl-amber-glow {
+  animation: dtl-glow-amber 3s ease-in-out infinite;
+}
+
+/* Purple glow border */
+.dtl-purple-glow {
+  animation: dtl-glow-purple 3s ease-in-out infinite;
+}
+
+/* Float animation */
+.dtl-float {
+  animation: dtl-float 4s ease-in-out infinite;
+}
+
+/* Lazy-load fade in */
+.dtl-lazy-img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.dtl-lazy-img.loaded {
+  opacity: 1;
+}
 
 :root {
   color-scheme: dark;
@@ -30,6 +107,11 @@
   /* Accent — amber/gold */
   --amber:     oklch(73% 0.17 78);
   --amber-dim: oklch(73% 0.17 78 / 0.15);
+
+  /* Purple — AI/tech neon (brand images) */
+  --purple:     oklch(48% 0.22 290);
+  --purple-dim: oklch(48% 0.22 290 / 0.18);
+  --purple-glow: 0 0 24px oklch(48% 0.22 290 / 0.45), 0 0 48px oklch(48% 0.22 290 / 0.20);
 
   /* Legacy aliases */
   --background: oklch(8% 0.015 60);

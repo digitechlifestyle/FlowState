@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getArticles } from "@/lib/articles";
 import type { Article } from "@/lib/articles";
+import { BrandHeroImage } from "@/components/BrandHeroImage";
+import { MobileBannerStrip } from "@/components/BrandImageCard";
 
 const TOPICS = [
   { label: "Bitcoin & Crypto",        href: "/blog?category=Cryptocurrencies" },
@@ -112,6 +114,19 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* RESOURCE HUB BANNER */}
+        <div style={{ marginTop: "32px", marginBottom: "8px" }}>
+          <BrandHeroImage
+            variant="resource-hub"
+            heading="Discover smarter crypto & AI resources"
+            subheading="Guides, checklists, tools, and playbooks to help you grow faster."
+            ctaLabel="Explore the Resource Hub"
+            ctaHref="/resources"
+            secondaryLabel="Free AI tools"
+            secondaryHref="/free-tools"
+          />
+        </div>
+
         {/* FEATURED + sidebar */}
         {featured && (
           <div className="content-grid" style={{ marginTop: "36px" }}>
@@ -130,8 +145,20 @@ export default async function Home() {
               {/* LATEST */}
               <div className="section-title" style={{ marginTop: "28px" }}>Latest</div>
               <div className="article-list">
-                {latest.map((article) => (
-                  <ArticleRowItem key={article.slug} article={article} />
+                {latest.map((article, i) => (
+                  <>
+                    <ArticleRowItem key={article.slug} article={article} />
+                    {/* Mobile banner strip after article 4 */}
+                    {i === 3 && (
+                      <div key="mobile-banner" style={{ margin: "4px 0" }}>
+                        <MobileBannerStrip
+                          src="/images/resource-hub-hero.png"
+                          alt="DigiTech Lifestyle Resource Hub — free crypto and AI guides"
+                          ctaHref="/resources"
+                        />
+                      </div>
+                    )}
+                  </>
                 ))}
               </div>
             </div>

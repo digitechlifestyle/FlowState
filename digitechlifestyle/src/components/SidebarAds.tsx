@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Partner = {
   id: string;
@@ -106,6 +107,63 @@ export function SidebarAds() {
   }
 
   return (
+    <div>
+      {/* Promo image card — Automation Playbook */}
+      <Link
+        href="/resources"
+        style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
+      >
+        <div style={{
+          position: "relative",
+          borderRadius: "12px",
+          overflow: "hidden",
+          background: "oklch(5% 0.01 270)",
+          animation: "dtl-glow-amber 3.5s ease-in-out infinite",
+        }}>
+          <img
+            src="/images/automation-playbook.png"
+            alt="DigiTech Lifestyle Automation Playbook — free no-code workflow guide"
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: "100%",
+              maxHeight: "160px",
+              objectFit: "cover",
+              objectPosition: "center top",
+              display: "block",
+            }}
+          />
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, transparent 40%, oklch(4% 0.01 60 / 0.85) 100%)",
+          }} />
+          <div style={{
+            position: "absolute",
+            bottom: "12px",
+            left: "12px",
+            right: "12px",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+          }}>
+            <div>
+              <p style={{ margin: 0, fontSize: "11px", fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Free Resource</p>
+              <p style={{ margin: "2px 0 0", fontSize: "13px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Automation Playbook</p>
+            </div>
+            <span style={{
+              background: "var(--amber)",
+              color: "oklch(8% 0.015 60)",
+              fontWeight: 800,
+              fontSize: "10px",
+              padding: "5px 10px",
+              borderRadius: "6px",
+              whiteSpace: "nowrap",
+            }}>Get free ↗</span>
+          </div>
+        </div>
+      </Link>
+
     <div style={{
       background: "var(--bg-card)",
       border: "1px solid var(--line)",
@@ -206,6 +264,7 @@ export function SidebarAds() {
       <p style={{ fontSize: "10px", color: "var(--muted)", opacity: 0.4, padding: "8px 14px", margin: 0 }}>
         Affiliate links — DigiTech may earn a commission.
       </p>
+    </div>
     </div>
   );
 }
