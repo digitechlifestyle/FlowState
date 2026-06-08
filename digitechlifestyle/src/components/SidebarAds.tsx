@@ -114,53 +114,18 @@ export function SidebarAds() {
         style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
       >
         <div style={{
-          position: "relative",
           borderRadius: "12px",
           overflow: "hidden",
-          background: "oklch(5% 0.01 270)",
-          animation: "dtl-glow-amber 3.5s ease-in-out infinite",
+          boxShadow: "0 0 0 1px rgba(245,158,11,0.35), 0 4px 20px rgba(245,158,11,0.15)",
+          transition: "box-shadow 0.2s ease",
         }}>
           <img
             src="/images/automation-playbook.png"
             alt="DigiTech Lifestyle Automation Playbook — free no-code workflow guide"
             loading="lazy"
             decoding="async"
-            style={{
-              width: "100%",
-              maxHeight: "160px",
-              objectFit: "cover",
-              objectPosition: "center top",
-              display: "block",
-            }}
+            style={{ width: "100%", display: "block" }}
           />
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(180deg, transparent 40%, oklch(4% 0.01 60 / 0.85) 100%)",
-          }} />
-          <div style={{
-            position: "absolute",
-            bottom: "12px",
-            left: "12px",
-            right: "12px",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-          }}>
-            <div>
-              <p style={{ margin: 0, fontSize: "11px", fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Free Resource</p>
-              <p style={{ margin: "2px 0 0", fontSize: "13px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Automation Playbook</p>
-            </div>
-            <span style={{
-              background: "var(--amber)",
-              color: "oklch(8% 0.015 60)",
-              fontWeight: 800,
-              fontSize: "10px",
-              padding: "5px 10px",
-              borderRadius: "6px",
-              whiteSpace: "nowrap",
-            }}>Get free ↗</span>
-          </div>
         </div>
       </Link>
 
@@ -172,27 +137,17 @@ export function SidebarAds() {
         style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
       >
         <div style={{
-          position: "relative",
           borderRadius: "12px",
           overflow: "hidden",
-          background: "oklch(5% 0.01 220)",
-          boxShadow: "0 0 0 1px rgba(59,130,246,0.3)",
+          boxShadow: "0 0 0 1px rgba(59,130,246,0.35), 0 4px 20px rgba(59,130,246,0.15)",
         }}>
           <img
             src="/images/generated/secure_your_crypto_future.png"
             alt="Secure Your Crypto — top hardware wallets and security tools"
             loading="lazy"
             decoding="async"
-            style={{ width: "100%", maxHeight: "120px", objectFit: "cover", objectPosition: "center", display: "block" }}
+            style={{ width: "100%", display: "block" }}
           />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, oklch(4% 0.01 220 / 0.9) 100%)" }} />
-          <div style={{ position: "absolute", bottom: "10px", left: "12px", right: "12px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, color: "#60a5fa", letterSpacing: "0.08em", textTransform: "uppercase" }}>Hardware Wallets</p>
-              <p style={{ margin: "2px 0 0", fontSize: "12px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Secure Your Crypto</p>
-            </div>
-            <span style={{ background: "#3b82f6", color: "#fff", fontWeight: 800, fontSize: "10px", padding: "4px 9px", borderRadius: "6px", whiteSpace: "nowrap" }}>Shop Ledger ↗</span>
-          </div>
         </div>
       </a>
 
@@ -202,27 +157,17 @@ export function SidebarAds() {
         style={{ display: "block", textDecoration: "none", marginBottom: "12px" }}
       >
         <div style={{
-          position: "relative",
           borderRadius: "12px",
           overflow: "hidden",
-          background: "oklch(5% 0.02 60)",
-          boxShadow: "0 0 0 1px rgba(247,166,0,0.3)",
+          boxShadow: "0 0 0 1px rgba(245,158,11,0.35), 0 4px 20px rgba(245,158,11,0.15)",
         }}>
           <img
             src="/images/generated/smarter_trading_with_digi_tech.png"
             alt="Trade Smarter — compare crypto exchanges and trading platforms"
             loading="lazy"
             decoding="async"
-            style={{ width: "100%", maxHeight: "120px", objectFit: "cover", objectPosition: "center top", display: "block" }}
+            style={{ width: "100%", display: "block" }}
           />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, oklch(4% 0.02 60 / 0.9) 100%)" }} />
-          <div style={{ position: "absolute", bottom: "10px", left: "12px", right: "12px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ margin: 0, fontSize: "10px", fontWeight: 700, color: "var(--amber)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Exchange Reviews</p>
-              <p style={{ margin: "2px 0 0", fontSize: "12px", fontWeight: 800, color: "var(--fg)", fontFamily: "'Sora', sans-serif" }}>Trade Smarter</p>
-            </div>
-            <span style={{ background: "var(--amber)", color: "oklch(8% 0.015 60)", fontWeight: 800, fontSize: "10px", padding: "4px 9px", borderRadius: "6px", whiteSpace: "nowrap" }}>Compare ↗</span>
-          </div>
         </div>
       </a>
 

@@ -49,6 +49,22 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 }
 
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&#8217;/g, "’")
+    .replace(/&#8216;/g, "‘")
+    .replace(/&#8220;/g, "“")
+    .replace(/&#8221;/g, "”")
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8212;/g, "—")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code, 10)))
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
+}
+
 function estimateReadingTime(html: string): string {
   const words = stripHtml(html).split(/\s+/).length;
   return `${Math.max(1, Math.ceil(words / 200))} min read`;
@@ -66,7 +82,7 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
   const image = wpImage || getFallbackImage(post.slug);
   return {
     slug: post.slug,
-    title: post.title.rendered,
+    title: decodeHtmlEntities(post.title.rendered),
     description: rawExcerpt || site.description,
     category,
     date: post.date.slice(0, 10),
