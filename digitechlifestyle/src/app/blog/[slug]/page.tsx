@@ -54,6 +54,15 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
       <div style={{ display: "grid", gap: "32px", gridTemplateColumns: "1fr", alignItems: "start" }}
            className="blog-two-col">
         <article>
+          {article.image && (
+            <div style={{ borderRadius: "12px", overflow: "hidden", marginBottom: "24px", maxHeight: "420px" }}>
+              <img
+                src={article.image}
+                alt={article.title}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          )}
           <div className="surface rounded-lg p-6 md:p-10">
             <div className="flex flex-wrap gap-2 text-sm text-slate-400">
               <span className="rounded-full bg-white/5 px-3 py-1 text-[var(--accent)]">{article.category}</span>
