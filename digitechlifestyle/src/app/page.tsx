@@ -3,6 +3,7 @@ import { getArticles } from "@/lib/articles";
 import type { Article } from "@/lib/articles";
 import { BrandHeroImage } from "@/components/BrandHeroImage";
 import { MobileBannerStrip } from "@/components/BrandImageCard";
+import { SidebarAds } from "@/components/SidebarAds";
 
 const TOPICS = [
   { label: "Bitcoin & Crypto",        href: "/blog?category=Cryptocurrencies" },
@@ -165,7 +166,9 @@ export default async function Home() {
 
             {/* Sidebar */}
             <aside className="sidebar">
-              <div className="disclaimer-box">
+              <SidebarAds />
+
+              <div className="disclaimer-box" style={{ marginTop: "16px" }}>
                 <div className="disclaimer-box-header">🔒 Educational only</div>
                 <p>
                   Everything on DigiTech Lifestyle is for informational purposes.
@@ -200,10 +203,6 @@ export default async function Home() {
                   ))}
                 </div>
               </div>
-
-              <p className="sidebar-disclaimer">
-                Some links are affiliate links. We may earn a commission at no extra cost to you. This never influences our editorial stance.
-              </p>
             </aside>
           </div>
         )}
