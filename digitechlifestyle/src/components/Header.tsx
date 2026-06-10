@@ -4,15 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV = [
-  { label: "Blog",          href: "/blog",                              external: false },
-  { label: "Tools",         href: "/tool-directory",                    external: false },
-  { label: "Free AI Tools", href: "/free-tools",                        external: false },
-  { label: "News",          href: "/news",                              external: false },
-  { label: "Reviews",       href: "/blog?category=Reviews",             external: false },
-  { label: "Videos",        href: "https://www.youtube.com/@digitechlifestyle", external: true },
-  { label: "About",         href: "/about",                             external: false },
-  { label: "Contact",       href: "/contact",                           external: false },
-  { label: "Admin",         href: "https://digitechlifestyle-com-206789.hostingersite.com/wp-admin/", external: true },
+  { label: "Blog",       href: "/blog",                                        external: false },
+  { label: "News",       href: "/news",                                        external: false },
+  { label: "Reviews",    href: "/blog?category=Reviews",                       external: false },
+  { label: "Resources",  href: "/resources",                                   external: false },
+  { label: "Free Tools", href: "/free-tools",                                  external: false },
+  { label: "Videos",     href: "https://www.youtube.com/@digitechlifestyle",   external: true  },
+  { label: "About",      href: "/about",                                       external: false },
+  { label: "Contact",    href: "/contact",                                     external: false },
 ];
 
 type Coin = { symbol: string; price: number; change: number };

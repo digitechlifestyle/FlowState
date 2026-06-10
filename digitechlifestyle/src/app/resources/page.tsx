@@ -16,35 +16,39 @@ export const metadata: Metadata = {
 const DOWNLOADS = [
   {
     title: "AI Business Toolkit",
-    text: "Prompts, SOPs, and AI-assisted operations for digital entrepreneurs.",
-    badge: "Free download",
+    text: "30+ prompts, SOPs, and AI workflow templates for digital entrepreneurs. Sent to your inbox instantly.",
+    badge: "Free — email delivery",
     img: "/images/generated/ai_driven_business_interface_concept.png",
     alt: "AI Business Toolkit — prompts and SOPs for digital entrepreneurs",
     accent: "purple" as const,
+    slug: "ai-business-toolkit",
   },
   {
     title: "Automation Audit Checklist",
-    text: "Map repetitive workflows and identify no-code automation wins.",
-    badge: "Free download",
+    text: "A step-by-step checklist to map repetitive tasks and find no-code automation wins. PDF, sent instantly.",
+    badge: "Free — PDF download",
     img: "/images/generated/futuristic_tech_automation_banner_design.png",
     alt: "Automation Audit Checklist — no-code workflow guide",
     accent: "amber" as const,
+    slug: "automation-checklist",
   },
   {
     title: "Affiliate Launch Planner",
-    text: "Plan niche research, content clusters, offers, and email capture.",
-    badge: "Free download",
+    text: "Plan your niche, pick offers, map content clusters, and set up email capture. Google Sheet template.",
+    badge: "Free — Google Sheet",
     img: "/images/generated/affiliate_launch_planner_dashboard.png",
     alt: "Affiliate Launch Planner — niche research and content planning guide",
     accent: "purple" as const,
+    slug: "affiliate-planner",
   },
   {
     title: "Digital Wealth Tracker",
-    text: "Track your apps, wallets, assets, subscriptions, and recurring income.",
-    badge: "Free download",
+    text: "Track wallets, subscriptions, assets, and recurring income in one place. Spreadsheet sent to inbox.",
+    badge: "Free — spreadsheet",
     img: "/images/generated/digital_wealth_tracker_interface.png",
     alt: "Digital Wealth Tracker — crypto and subscription asset tracker template",
     accent: "amber" as const,
+    slug: "wealth-tracker",
   },
 ];
 
@@ -87,7 +91,7 @@ export default function ResourcesPage() {
               Free Downloads
             </h2>
             <p style={{ color: "var(--muted)", fontSize: "13px", margin: "0 0 20px" }}>
-              Click any resource to unlock via the newsletter. Free forever.
+              Subscribe free — each resource is delivered to your inbox immediately after you confirm. No spam, unsubscribe any time.
             </p>
             <div style={{
               display: "grid",
@@ -95,7 +99,7 @@ export default function ResourcesPage() {
               gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             }}>
               {DOWNLOADS.map((d) => (
-                <Link key={d.title} href="/newsletter" style={{ textDecoration: "none" }}>
+                <Link key={d.title} href={`/newsletter?resource=${d.slug}`} style={{ textDecoration: "none" }}>
                   <BrandImageCard
                     src={d.img}
                     alt={d.alt}
@@ -103,8 +107,8 @@ export default function ResourcesPage() {
                     title={d.title}
                     description={d.text}
                     badge={d.badge}
-                    ctaLabel="Unlock free"
-                    ctaHref="/newsletter"
+                    ctaLabel="Get it free →"
+                    ctaHref={`/newsletter?resource=${d.slug}`}
                     accentColor={d.accent}
                   />
                 </Link>

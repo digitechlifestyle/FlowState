@@ -75,9 +75,24 @@ function getFallbackImage(slug: string): string {
   return `https://picsum.photos/seed/${encodeURIComponent(slug)}/800/500`;
 }
 
+/** Guess a display category from slug/title when WP categories are empty */
+function inferCategory(slug: string, title: string): string {
+  const t = (slug + " " + title).toLowerCase();
+  if (/xrp|ripple/.test(t)) return "XRP & Ripple";
+  if (/bitcoin|btc|satoshi|sats/.test(t)) return "Bitcoin";
+  if (/ethereum|eth\b/.test(t)) return "Ethereum";
+  if (/defi|decentrali[sz]|liquidity|yield|uniswap|aave/.test(t)) return "DeFi";
+  if (/crypto|blockchain|altcoin|token|coin|wallet|exchange|binance|coinbase|kraken/.test(t)) return "Crypto";
+  if (/ai\b|artificial intelligence|chatgpt|openai|claude|gemini|llm|machine learning/.test(t)) return "AI";
+  if (/review/.test(t)) return "Reviews";
+  if (/news|breaking|alert/.test(t)) return "News";
+  return "Crypto & AI";
+}
+
 function wpToArticle(post: WPPost, categories: Record<number, string>): Article {
   const rawExcerpt = stripHtml(post.excerpt?.rendered || "").slice(0, 160);
-  const category = categories[post.categories?.[0]] || "AI Tools";
+  const wpCategory = post.categories?.[0] ? categories[post.categories[0]] : null;
+  const category = wpCategory || inferCategory(post.slug, post.title?.rendered || "");
   const wpImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
   const image = wpImage || getFallbackImage(post.slug);
   return {
