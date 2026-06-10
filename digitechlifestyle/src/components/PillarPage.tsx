@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AdSlot } from "@/components/AdSlot";
+import { SidebarAds } from "@/components/SidebarAds";
 import { AffiliateCta } from "@/components/AffiliateCta";
 import { ArticleCard } from "@/components/ArticleCard";
 import { NewsletterForm } from "@/components/NewsletterForm";
@@ -53,7 +53,7 @@ export async function PillarPage({ slug }: PillarPageProps) {
           </div>
         </div>
         <aside className="grid content-start gap-4">
-          <AdSlot label="right sidebar" className="min-h-72" />
+          <SidebarAds />
           <NewsletterForm compact />
         </aside>
       </div>

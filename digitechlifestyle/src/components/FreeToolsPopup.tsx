@@ -14,6 +14,14 @@ const tools = [
   { emoji: "🎬", name: "HunyuanVideo",   category: "AI Video Generation", href: "https://hunyuanvideo.com",   cta: "Access HunyuanVideo free",  description: "Create AI-generated videos for free. No monthly subscription required." },
   { emoji: "✂️", name: "Vider AI",       category: "AI Video Editing",    href: "https://vider.ai",           cta: "Access Vider AI free",      description: "Edit videos with AI — trim, caption, cut, and enhance without a timeline." },
   { emoji: "⚔️", name: "Arena AI",       category: "AI Comparison",       href: "https://lmarena.ai",         cta: "Access Arena AI free",      description: "Compare any AI model side by side for free. Run the same prompt, see who wins." },
+  { emoji: "🔍", name: "Perplexity AI",  category: "AI Search",           href: "https://www.perplexity.ai",  cta: "Access Perplexity free",    description: "AI-powered search that cites its sources. Free tier covers most everyday research tasks." },
+];
+
+const affiliates = [
+  { name: "Ledger",      label: "Secure your crypto",       cta: "Shop Ledger →",       url: "https://shop.ledger.com/?referral_code=FN50B8J0VZNVR" },
+  { name: "Coinbase UK", label: "FCA-registered exchange",  cta: "Start on Coinbase →", url: "https://coinbase.com/join/digitechlifestyle" },
+  { name: "Kraken",      label: "Advanced trading, 0.16%",  cta: "Trade on Kraken →",   url: "https://kraken.app.link/PzxrgWP7Qzb" },
+  { name: "Koinly",      label: "HMRC crypto tax reports",  cta: "Try Koinly free →",   url: "https://koinly.io" },
 ];
 
 export function FreeToolsPopup() {
@@ -79,12 +87,21 @@ export function FreeToolsPopup() {
               position: "absolute", top: 0, left: "32px", right: "32px",
               height: "2px", background: "var(--amber)", borderRadius: "0 0 2px 2px",
             }} />
+            <button
+              onClick={() => { sessionStorage.setItem(STORAGE_KEY, "1"); setVisible(false); setUnlocked(true); }}
+              aria-label="Close"
+              style={{
+                position: "absolute", top: "14px", right: "14px",
+                background: "none", border: "none", color: "var(--muted)",
+                fontSize: "20px", lineHeight: 1, cursor: "pointer", padding: "4px 8px",
+              }}
+            >✕</button>
 
             <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--amber)", margin: "0 0 14px" }}>
               🔓 Free access
             </p>
             <h2 style={{ fontSize: "22px", fontWeight: 800, color: "var(--fg)", lineHeight: 1.2, margin: "0 0 10px" }}>
-              Unlock 6 free AI tools
+              Unlock 7 free AI tools
             </h2>
             <p style={{ fontSize: "14px", lineHeight: 1.65, color: "var(--muted)", margin: "0 0 24px" }}>
               Enter your email and get instant access. No paid plans, no credit cards. I&apos;ll also send you useful tools and tips as I find them.
@@ -124,6 +141,28 @@ export function FreeToolsPopup() {
                 </Link>
               </div>
             ))}
+          </div>
+
+          {/* Affiliate links */}
+          <div style={{ marginTop: "40px" }}>
+            <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--muted)", margin: "0 0 16px" }}>
+              Recommended by DigiTech
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px" }}>
+              {affiliates.map((a) => (
+                <Link key={a.name} href={a.url} target="_blank" rel="noopener noreferrer"
+                  style={{ display: "block", background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "10px", padding: "16px", textDecoration: "none" }}>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--fg)", margin: "0 0 4px" }}>{a.name}</p>
+                  <p style={{ fontSize: "12px", color: "var(--muted)", margin: "0 0 10px" }}>{a.label}</p>
+                  <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--amber)", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    {a.cta} <ArrowUpRight size={12} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <p style={{ fontSize: "10px", color: "var(--muted)", marginTop: "10px", opacity: 0.6 }}>
+              DigiTech may earn a commission on purchases. This never affects our editorial recommendations.
+            </p>
           </div>
         </div>
       )}

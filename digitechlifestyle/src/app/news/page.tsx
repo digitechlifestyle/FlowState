@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AdSlot } from "@/components/AdSlot";
+import { SidebarAds } from "@/components/SidebarAds";
 import { ArticleCard } from "@/components/ArticleCard";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { getArticles } from "@/lib/articles";
@@ -30,7 +30,7 @@ export default async function NewsPage() {
           </div>
         </div>
         <aside className="grid content-start gap-4">
-          <AdSlot label="right sidebar" className="min-h-72" />
+          <SidebarAds />
           <NewsletterForm compact />
         </aside>
       </div>

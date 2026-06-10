@@ -1,4 +1,5 @@
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { SidebarAds } from "@/components/SidebarAds";
 
 type StandardPageProps = {
   eyebrow: string;
@@ -17,7 +18,10 @@ export function StandardPage({ eyebrow, title, description, children }: Standard
           <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--muted)]">{description}</p>
           <div className="prose-content mt-10">{children}</div>
         </div>
-        <NewsletterForm compact />
+        <aside className="grid content-start gap-4" style={{ position: "sticky", top: "80px", alignContent: "start" }}>
+          <SidebarAds />
+          <NewsletterForm compact />
+        </aside>
       </div>
     </main>
   );

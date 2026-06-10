@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getArticles } from "@/lib/articles";
 import type { Article } from "@/lib/articles";
+import { SidebarAds } from "@/components/SidebarAds";
 
 export const metadata: Metadata = {
   title: "Blog — DigiTech Lifestyle",
@@ -133,6 +134,10 @@ export default async function BlogPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="sidebar-widget">
+              <SidebarAds />
             </div>
 
             <p className="sidebar-disclaimer">
