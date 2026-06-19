@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { getArticles } from "@/lib/articles";
 import type { Article } from "@/lib/articles";
-import { BrandHeroImage } from "@/components/BrandHeroImage";
-import { MobileBannerStrip } from "@/components/BrandImageCard";
 import { SidebarAds } from "@/components/SidebarAds";
 
 const TOPICS = [
@@ -115,17 +113,45 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* RESOURCE HUB BANNER */}
-        <div style={{ marginTop: "32px", marginBottom: "8px" }}>
-          <BrandHeroImage
-            variant="resource-hub"
-            heading="Discover smarter crypto & AI resources"
-            subheading="Guides, checklists, tools, and playbooks to help you grow faster."
-            ctaLabel="Explore the Resource Hub"
-            ctaHref="/resources"
-            secondaryLabel="Free AI tools"
-            secondaryHref="/free-tools"
-          />
+        {/* ─── START HERE ─── */}
+        <section style={{ marginTop: "32px", padding: "20px 24px", background: "oklch(13% 0.02 240 / 0.6)", border: "1px solid oklch(40% 0.04 240 / 0.3)", borderRadius: "12px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--amber)", marginBottom: "6px" }}>New here?</div>
+          <h2 style={{ fontSize: "17px", fontWeight: 800, color: "var(--fg)", margin: "0 0 10px" }}>Start Here — Beginner&apos;s Guide to Crypto &amp; AI</h2>
+          <p style={{ color: "var(--muted)", fontSize: "13px", margin: "0 0 14px", lineHeight: 1.55 }}>
+            Never bought crypto? Not sure which AI tools are worth it? These are the best places to start — plain English, no hype.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {[
+              { label: "What is Bitcoin?",          href: "/blog?category=Cryptocurrencies" },
+              { label: "How to buy crypto safely",  href: "/blog?category=Cryptocurrencies" },
+              { label: "Best free AI tools",        href: "/free-tools" },
+              { label: "Exchange reviews",          href: "/blog?category=Reviews" },
+              { label: "DeFi explained",            href: "/blog?category=DeFi" },
+              { label: "Crypto safety guide",       href: "/resources" },
+            ].map((l) => (
+              <Link key={l.label} href={l.href} className="topic-link">{l.label}</Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ─── CRYPTO SAFETY HUB + TOP AI TOOLS ─── */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginTop: "16px" }}>
+          <div style={{ padding: "20px 22px", background: "oklch(13% 0.03 25 / 0.5)", border: "1px solid oklch(55% 0.15 25 / 0.3)", borderRadius: "12px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#f87171", marginBottom: "6px" }}>🔒 Crypto Safety Hub</div>
+            <h3 style={{ fontSize: "15px", fontWeight: 800, color: "var(--fg)", margin: "0 0 8px" }}>Protect your crypto</h3>
+            <p style={{ color: "var(--muted)", fontSize: "12px", margin: "0 0 12px", lineHeight: 1.55 }}>
+              Scams, hacks, and exchange collapses happen. Learn how to keep your assets safe — hardware wallets, seed phrase security, and exchange hardening.
+            </p>
+            <Link href="/resources" className="read-more-link">Get the free security guide →</Link>
+          </div>
+          <div style={{ padding: "20px 22px", background: "oklch(13% 0.03 280 / 0.5)", border: "1px solid oklch(55% 0.15 280 / 0.3)", borderRadius: "12px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(72% 0.18 280)", marginBottom: "6px" }}>🤖 Top AI Tools 2026</div>
+            <h3 style={{ fontSize: "15px", fontWeight: 800, color: "var(--fg)", margin: "0 0 8px" }}>Best free AI tools right now</h3>
+            <p style={{ color: "var(--muted)", fontSize: "12px", margin: "0 0 12px", lineHeight: 1.55 }}>
+              Writing assistants, image generators, research tools — the most useful AI tools available for free, tested and reviewed for UK users.
+            </p>
+            <Link href="/free-tools" className="read-more-link">Browse free AI tools →</Link>
+          </div>
         </div>
 
         {/* FEATURED + sidebar */}
@@ -149,14 +175,45 @@ export default async function Home() {
                 {latest.map((article, i) => (
                   <>
                     <ArticleRowItem key={article.slug} article={article} />
-                    {/* Mobile banner strip after article 4 */}
+                    {/* Free Tools promo strip after article 4 */}
                     {i === 3 && (
-                      <div key="mobile-banner" style={{ margin: "4px 0" }}>
-                        <MobileBannerStrip
-                          src="/images/resource-hub-hero.png"
-                          alt="DigiTech Lifestyle Resource Hub — free crypto and AI guides"
-                          ctaHref="/resources"
-                        />
+                      <div key="free-tools-strip" style={{
+                        margin: "4px 0",
+                        background: "oklch(14% 0.025 78 / 0.6)",
+                        border: "1px solid oklch(73% 0.17 78 / 0.25)",
+                        borderRadius: "10px",
+                        padding: "16px 20px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "16px",
+                        flexWrap: "wrap",
+                      }}>
+                        <div>
+                          <p style={{ margin: 0, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--amber)", marginBottom: "4px" }}>
+                            🔓 Free download
+                          </p>
+                          <p style={{ margin: 0, fontSize: "14px", fontWeight: 700, color: "var(--fg)", lineHeight: 1.3 }}>
+                            7 free AI tools — no subscriptions needed
+                          </p>
+                          <p style={{ margin: "4px 0 0", fontSize: "12px", color: "var(--muted)" }}>
+                            Enter your email and download the full list instantly.
+                          </p>
+                        </div>
+                        <Link href="/free-tools" style={{
+                          display: "inline-block",
+                          background: "var(--amber)",
+                          color: "oklch(8% 0.015 60)",
+                          fontWeight: 800,
+                          fontSize: "12px",
+                          padding: "9px 18px",
+                          borderRadius: "7px",
+                          textDecoration: "none",
+                          whiteSpace: "nowrap",
+                          flexShrink: 0,
+                        }}>
+                          Get free bundle →
+                        </Link>
                       </div>
                     )}
                   </>

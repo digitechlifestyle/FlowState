@@ -141,19 +141,17 @@ export default function ResourcesPage() {
             }}>
               {DOWNLOADS.map((d) => (
                 <div key={d.title} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <Link href={d.pdf} style={{ textDecoration: "none", display: "block" }}>
-                    <BrandImageCard
-                      src={d.img}
-                      alt={d.alt}
-                      size="thumb"
-                      title={d.title}
-                      description={d.text}
-                      badge={d.badge}
-                      ctaLabel="Get it free →"
-                      ctaHref={d.pdf}
-                      accentColor={d.accent}
-                    />
-                  </Link>
+                  <BrandImageCard
+                    src={d.img}
+                    alt={d.alt}
+                    size="thumb"
+                    title={d.title}
+                    description={d.text}
+                    badge={d.badge}
+                    ctaLabel="Get it free →"
+                    ctaHref={d.pdf}
+                    accentColor={d.accent}
+                  />
                   {d.affiliates.length > 0 && (
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", padding: "0 2px" }}>
                       {d.affiliates.map((aff) => (
@@ -197,6 +195,20 @@ export default function ResourcesPage() {
               secondaryHref="/automation"
             />
           </section>
+
+          {/* ── Affiliate disclosure ── */}
+          <div style={{
+            marginTop: "32px",
+            padding: "14px 18px",
+            background: "oklch(14% 0.02 78 / 0.4)",
+            border: "1px solid oklch(73% 0.17 78 / 0.2)",
+            borderRadius: "10px",
+            fontSize: "12px",
+            color: "var(--muted)",
+            lineHeight: 1.6,
+          }}>
+            <strong style={{ color: "var(--fg)" }}>Affiliate disclosure:</strong> Some links on this page are affiliate links. DigiTech Lifestyle may earn a small commission if you make a purchase — at no extra cost to you. We only list tools and products we genuinely recommend.
+          </div>
 
           {/* ── Tool Directory ── */}
           <section id="tool-directory" style={{ marginTop: "48px" }}>

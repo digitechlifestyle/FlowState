@@ -39,6 +39,11 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
 
   if (!article) notFound();
 
+  const allArticles = await getArticles();
+  const related = allArticles
+    .filter((a) => a.category === article.category && a.slug !== slug)
+    .slice(0, 3);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -121,9 +126,42 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             </a>
           </div>
 
+          {/* Affiliate disclosure */}
+          <div style={{
+            marginTop: "32px",
+            padding: "14px 18px",
+            background: "oklch(14% 0.02 78 / 0.4)",
+            border: "1px solid oklch(73% 0.17 78 / 0.2)",
+            borderRadius: "10px",
+            fontSize: "12px",
+            color: "var(--muted)",
+            lineHeight: 1.6,
+          }}>
+            <strong style={{ color: "var(--fg)" }}>Disclosure:</strong> Some links in this article may be affiliate links. If you click and purchase, DigiTech Lifestyle may earn a small commission at no extra cost to you. This never influences our editorial stance — we only recommend products we genuinely believe in.
+          </div>
+
           <div className="mt-10">
             <AffiliateCta />
           </div>
+
+          {/* Related articles */}
+          {related.length > 0 && (
+            <div style={{ marginTop: "48px" }}>
+              <div className="section-title" style={{ marginBottom: "16px" }}>Related articles</div>
+              <div style={{ display: "grid", gap: "12px", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                {related.map((r) => (
+                  <a key={r.slug} href={`/blog/${r.slug}`} style={{ textDecoration: "none", display: "block", padding: "14px 16px", background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "10px" }}>
+                    {r.image && (
+                      <img src={r.image} alt={r.title} loading="lazy" style={{ width: "100%", height: "110px", objectFit: "cover", borderRadius: "6px", marginBottom: "10px", display: "block" }} />
+                    )}
+                    <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--muted)", marginBottom: "4px" }}>{r.category}</div>
+                    <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--fg)", lineHeight: 1.4 }}>{r.title}</div>
+                    <div style={{ fontSize: "11px", color: "var(--amber)", marginTop: "8px", fontWeight: 600 }}>Read article →</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
         <aside style={{ position: "sticky", top: "80px", display: "grid", gap: "16px", alignContent: "start" }}>
           <SidebarAds />
