@@ -235,6 +235,54 @@ export default function ResourcesPage() {
             </div>
           </section>
 
+          {/* ── FAQ ── */}
+          <section id="faq" style={{ marginTop: "56px" }}>
+            <h2 style={{ fontSize: "22px", fontWeight: 800, color: "var(--fg)", margin: "0 0 6px", fontFamily: "'Sora', sans-serif" }}>
+              Frequently Asked Questions
+            </h2>
+            <p style={{ color: "var(--muted)", fontSize: "13px", margin: "0 0 20px" }}>
+              Common questions about crypto safety, AI tools, and getting started.
+            </p>
+            <div style={{ display: "grid", gap: "12px" }}>
+              {[
+                {
+                  q: "Is crypto safe to invest in?",
+                  a: "Crypto is a high-risk, high-volatility asset class. Only invest what you can afford to lose. Use regulated UK exchanges (Coinbase, Kraken), enable 2FA, and store large amounts in a hardware wallet like a Ledger. Our free security guide walks you through the full setup.",
+                },
+                {
+                  q: "What is the safest way to store crypto?",
+                  a: "A hardware wallet (cold storage) is the safest option for significant holdings. Your private keys never touch the internet. For smaller amounts used regularly, a reputable exchange with 2FA and withdrawal whitelisting is acceptable.",
+                },
+                {
+                  q: "Which AI tools are actually free in 2026?",
+                  a: "ChatGPT (free tier), Google Gemini, Microsoft Copilot, Perplexity, Claude, and Canva AI are all free to use at a meaningful level. Our free AI tools list covers 7 of the best with no subscription needed.",
+                },
+                {
+                  q: "Do I need to pay tax on crypto in the UK?",
+                  a: "Yes — HMRC treats crypto as a capital asset. You pay Capital Gains Tax on profits above the annual allowance when you sell, swap, or spend crypto. Always keep records of every transaction. Consult a tax professional for your specific situation.",
+                },
+                {
+                  q: "How do I spot a crypto scam?",
+                  a: "Red flags: guaranteed returns, pressure to act fast, requests to send crypto first, unofficial Telegram groups, unsolicited DMs. No legitimate exchange or wallet will ever ask for your seed phrase. If in doubt, don't.",
+                },
+                {
+                  q: "What is DeFi and is it safe?",
+                  a: "DeFi (Decentralised Finance) uses smart contracts on blockchains like Ethereum to offer lending, trading, and yield without a central authority. It carries significant risks — smart contract bugs, rug pulls, and token volatility. Research thoroughly before using any DeFi protocol.",
+                },
+              ].map((item) => (
+                <details key={item.q} style={{ background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "10px", padding: "0" }}>
+                  <summary style={{ padding: "16px 18px", fontSize: "14px", fontWeight: 700, color: "var(--fg)", cursor: "pointer", listStyle: "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    {item.q}
+                    <span style={{ fontSize: "18px", color: "var(--muted)", flexShrink: 0, marginLeft: "12px" }}>＋</span>
+                  </summary>
+                  <div style={{ padding: "0 18px 16px", fontSize: "13px", color: "var(--muted)", lineHeight: 1.65, borderTop: "1px solid var(--line)", marginTop: "-1px", paddingTop: "14px" }}>
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+
         </div>
 
         {/* ── Sidebar ── */}

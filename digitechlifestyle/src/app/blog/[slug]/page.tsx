@@ -73,11 +73,36 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               <span className="rounded-full bg-white/5 px-3 py-1 text-[var(--accent)]">{article.category}</span>
               <span>{article.readingTime}</span>
               <span>{new Date(article.date).toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" })}</span>
+              {new Date(article.date).getFullYear() >= 2026 && (
+                <span style={{ background: "oklch(73% 0.17 78 / 0.15)", border: "1px solid oklch(73% 0.17 78 / 0.4)", color: "var(--amber)", borderRadius: "20px", padding: "2px 10px", fontSize: "11px", fontWeight: 700 }}>✓ Updated for 2026</span>
+              )}
             </div>
             <h1 className="mt-5 text-4xl font-black leading-tight text-white md:text-5xl">{article.title}</h1>
             <p className="mt-5 text-xl leading-8 text-[var(--muted)]">{article.description}</p>
           </div>
           <div className="prose-content mt-8" dangerouslySetInnerHTML={{ __html: markdownToHtml(article.content) }} />
+
+          {/* Inline newsletter CTA */}
+          <div style={{
+            margin: "40px 0 0",
+            padding: "24px 28px",
+            background: "oklch(13% 0.025 240 / 0.7)",
+            border: "1px solid oklch(55% 0.12 240 / 0.3)",
+            borderRadius: "12px",
+          }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--amber)", marginBottom: "6px" }}>Free weekly newsletter</div>
+            <h3 style={{ fontSize: "18px", fontWeight: 800, color: "var(--fg)", margin: "0 0 8px" }}>Stay ahead of the market</h3>
+            <p style={{ fontSize: "13px", color: "var(--muted)", margin: "0 0 16px", lineHeight: 1.55 }}>
+              Join 4,200+ readers getting weekly crypto, AI, and digital lifestyle insights every Thursday. No spam. Unsubscribe any time.
+            </p>
+            <form action="/newsletter" method="GET" style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+              <input type="email" name="email" placeholder="Your email address" required autoComplete="email"
+                style={{ flex: "1 1 200px", padding: "10px 14px", borderRadius: "8px", border: "1px solid var(--line)", background: "var(--bg-card)", color: "var(--fg)", fontSize: "13px" }} />
+              <button type="submit" style={{ padding: "10px 20px", borderRadius: "8px", background: "var(--amber)", color: "oklch(8% 0.015 60)", fontWeight: 800, fontSize: "13px", border: "none", cursor: "pointer", whiteSpace: "nowrap" }}>
+                Join free →
+              </button>
+            </form>
+          </div>
 
           {/* Social share buttons */}
           <div style={{
@@ -162,6 +187,25 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               </div>
             </div>
           )}
+          {/* Internal links nav */}
+          <div style={{ marginTop: "40px", padding: "18px 22px", background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "10px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)", marginBottom: "10px" }}>More from DigiTech Lifestyle</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              {[
+                { label: "Latest News",        href: "/blog" },
+                { label: "Crypto Guides",      href: "/blog?category=Cryptocurrencies" },
+                { label: "AI & Technology",    href: "/blog?category=AI" },
+                { label: "Exchange Reviews",   href: "/blog?category=Reviews" },
+                { label: "DeFi & Blockchain",  href: "/blog?category=DeFi" },
+                { label: "Free Tools",         href: "/free-tools" },
+                { label: "Resources",          href: "/resources" },
+              ].map((l) => (
+                <a key={l.label} href={l.href} style={{ fontSize: "12px", fontWeight: 600, padding: "6px 12px", borderRadius: "20px", border: "1px solid var(--line)", color: "var(--muted)", textDecoration: "none", background: "transparent" }}>
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </article>
         <aside style={{ position: "sticky", top: "80px", display: "grid", gap: "16px", alignContent: "start" }}>
           <SidebarAds />
