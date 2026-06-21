@@ -104,7 +104,7 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
     author: "DigitechLifestyle Editorial",
     readingTime: post.content?.rendered
       ? estimateReadingTime(post.content.rendered)
-      : `${Math.max(1, Math.ceil(rawExcerpt.split(/\s+/).length / 40))} min read`,
+      : "7 min read",
     featured: post.sticky || false,
     content: post.content?.rendered || "",
     image,
@@ -114,7 +114,7 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
 // Fetch a single page of posts (listings — no content, lighter payload)
 async function fetchPage(page: number): Promise<{ posts: WPPost[]; totalPages: number }> {
   const res = await fetch(
-    `${WP_API}/posts?per_page=100&page=${page}&status=publish&_embed=wp:featuredmedia&_fields=slug,title,excerpt,content,date,categories,sticky,_links,_embedded`,
+    `${WP_API}/posts?per_page=100&page=${page}&status=publish&_embed=wp:featuredmedia&_fields=slug,title,excerpt,date,categories,sticky,_links,_embedded`,
     { cache: "force-cache" }
   );
   if (!res.ok) return { posts: [], totalPages: 1 };
