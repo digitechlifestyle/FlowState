@@ -13,7 +13,7 @@ export type Article = {
   image?: string;
 };
 
-const WP_API = "https://digitechlifestyle-com-206789.hostingersite.com/wp-json/wp/v2";
+const WP_API = "https://digitechlifestyle.com/wp-json/wp/v2";
 
 type WPPost = {
   slug: string;
@@ -114,7 +114,7 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
 // Fetch a single page of posts (listings — no content, lighter payload)
 async function fetchPage(page: number): Promise<{ posts: WPPost[]; totalPages: number }> {
   const res = await fetch(
-    `${WP_API}/posts?per_page=100&page=${page}&status=publish&_embed=wp:featuredmedia&_fields=slug,title,excerpt,date,categories,sticky,_links,_embedded`,
+    `${WP_API}/posts?per_page=100&page=${page}&status=publish&_embed=wp:featuredmedia&_fields=slug,title,excerpt,content,date,categories,sticky,_links,_embedded`,
     { cache: "force-cache" }
   );
   if (!res.ok) return { posts: [], totalPages: 1 };
