@@ -13,7 +13,7 @@ export type Article = {
   image?: string;
 };
 
-const WP_API = "https://digitechlifestyle-com-206789.hostingersite.com/wp-json/wp/v2";
+const WP_API = "https://digitechlifestyle.com/wp-json/wp/v2";
 
 type WPPost = {
   slug: string;

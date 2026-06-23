@@ -16,6 +16,8 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Build started" >> "$LOG"
 # Build
 cd "$SCRIPT_DIR"
 export PATH="/Users/joerobertson/.nvm/versions/node/v24.15.0/bin:$PATH"
+# Clear Next.js fetch cache so WP articles are always fresh
+rm -rf .next/cache/fetch-cache
 npm run build >> "$LOG" 2>&1
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Build done. Deploying..." >> "$LOG"
