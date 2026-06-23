@@ -1,6 +1,9 @@
 [build]
   publish = "out"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   NEXT_PUBLIC_SITE_URL = "https://www.digitechlifestyle.com"
 
@@ -64,8 +67,3 @@
   status = 302
   force = true
 
-# SPA catch-all — all other routes serve the Next.js app
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
