@@ -4,14 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV = [
-  { label: "Blog",       href: "/blog",                                        external: false },
-  { label: "News",       href: "/news",                                        external: false },
-  { label: "Reviews",    href: "/blog?category=Reviews",                       external: false },
-  { label: "Resources",  href: "/resources",                                   external: false },
-  { label: "Free Tools", href: "/free-tools",                                  external: false },
-  { label: "Videos",     href: "https://www.youtube.com/@digitechlifestyle",   external: true  },
-  { label: "About",      href: "/about",                                       external: false },
-  { label: "Contact",    href: "/contact",                                     external: false },
+  { label: "Blog",     href: "/blog",                                        external: false },
+  { label: "Tools",    href: "/tool-directory",                              external: false },
+  { label: "News",     href: "/news",                                        external: false },
+  { label: "Reviews",  href: "/reviews",                                     external: false },
+  { label: "Videos",   href: "https://www.youtube.com/@digitechlifestyle",   external: true  },
+  { label: "About",    href: "/about",                                       external: false },
 ];
 
 type Coin = { symbol: string; price: number; change: number };
@@ -25,7 +23,7 @@ function useTicker() {
 
   useEffect(() => {
     const fetch_ = () =>
-      fetch("/.netlify/functions/prices")
+      fetch("/prices.php")
         .then((r) => r.json())
         .then((arr: Array<{ symbol: string; price: number; change: number }>) => {
           if (Array.isArray(arr)) setCoins(arr);
