@@ -93,13 +93,7 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
   const rawExcerpt = stripHtml(post.excerpt?.rendered || "").slice(0, 160);
   const wpCategory = post.categories?.[0] ? categories[post.categories[0]] : null;
   const category = wpCategory || inferCategory(post.slug, post.title?.rendered || "");
-  const rawImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-  // WP Snippet 5 rewrites subdomain → www in REST API responses.
-  // www.digitechlifestyle.com/wp-content/* doesn't exist on the static server, so rewrite back.
-  const wpImage = rawImage?.replace(
-    'https://www.digitechlifestyle.com',
-    'https://digitechlifestyle-com-206789.hostingersite.com'
-  );
+  const wpImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
   const image = wpImage || getFallbackImage(post.slug);
   return {
     slug: post.slug,
