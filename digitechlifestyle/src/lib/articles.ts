@@ -94,11 +94,11 @@ function wpToArticle(post: WPPost, categories: Record<number, string>): Article 
   const wpCategory = post.categories?.[0] ? categories[post.categories[0]] : null;
   const category = wpCategory || inferCategory(post.slug, post.title?.rendered || "");
   const rawImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-  // WP Snippet 5 rewrites image URLs to www.digitechlifestyle.com which is broken (DNS→Hostinger CDN, no SSL).
-  // Rewrite to the Hostinger subdomain where WP and its media actually live.
+  // WP Snippet 5 rewrites image URLs to www.digitechlifestyle.com (SSL broken on www).
+  // Rewrite to non-www — wp-content/uploads is symlinked from static site to WP uploads dir.
   const wpImage = rawImage?.replace(
     "https://www.digitechlifestyle.com",
-    "https://digitechlifestyle-com-206789.hostingersite.com"
+    "https://digitechlifestyle.com"
   );
   const image = wpImage || getFallbackImage(post.slug);
   return {
