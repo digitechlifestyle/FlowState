@@ -6,6 +6,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { BrandHeroImage } from "@/components/BrandHeroImage";
 import { BrandImageCard } from "@/components/BrandImageCard";
 import { tools } from "@/lib/tools";
+import { DownloadButton } from "@/components/DownloadButton";
 
 export const metadata: Metadata = {
   title: "Resources & Tools — DigiTech Lifestyle",
@@ -16,74 +17,74 @@ export const metadata: Metadata = {
 const DOWNLOADS = [
   {
     title: "AI Business Toolkit",
-    text: "30+ prompts, SOPs & workflow templates. Content engine, newsletter planner, social repurposing, lead magnet builder, and more.",
+    text: "Stop starting from scratch. 30+ battle-tested prompts, SOPs, and templates covering content creation, newsletter planning, social repurposing, and lead magnet building. Used by solo operators who want to run a professional digital business without a team.",
     badge: "Free PDF",
     img: "/images/generated/ai_driven_business_interface_concept.png",
     alt: "AI Business Toolkit — prompts and SOPs for digital entrepreneurs",
     accent: "purple" as const,
-    pdf: "/newsletter?resource=ai-business-toolkit",
+    pdf: "/downloads/ai-business-toolkit.html",
     affiliates: [] as { label: string; href: string }[],
   },
   {
     title: "Automation Audit Checklist",
-    text: "8-step audit to map repetitive tasks and find no-code automation wins. Includes scoring matrix and 30-day plan.",
+    text: "Most people waste hours on tasks a £0 tool could handle. This 8-step audit reveals exactly which parts of your business to automate first, with a scoring matrix to prioritise your wins and a 30-day action plan to get it done.",
     badge: "Free PDF Checklist",
     img: "/images/generated/futuristic_tech_automation_banner_design.png",
     alt: "Automation Audit Checklist — no-code workflow guide",
     accent: "amber" as const,
-    pdf: "/newsletter?resource=automation-checklist",
+    pdf: "/downloads/automation-checklist.html",
     affiliates: [] as { label: string; href: string }[],
   },
   {
     title: "Automation Playbook",
-    text: "Build no-code workflows for email, content, admin, and social. Save time and scale your digital business.",
+    text: "The step-by-step guide to building no-code workflows across email, content, admin, and social — using tools like Zapier and Make. Real workflows, not theory. Includes 12 copy-paste automations you can deploy today.",
     badge: "Free Guide",
     img: "/images/generated/no_code_automation_playbook_design.png",
     alt: "Automation Playbook — no-code workflow guide for digital business",
     accent: "amber" as const,
-    pdf: "/newsletter?resource=automation-playbook",
+    pdf: "/downloads/automation-playbook.html",
     affiliates: [] as { label: string; href: string }[],
   },
   {
     title: "Affiliate Launch Planner",
-    text: "Choose a niche, pick affiliate offers, map content clusters, and set up email capture — step by step.",
+    text: "From zero to your first commission — in writing. Covers niche selection, picking the right affiliate programmes, mapping content clusters that actually rank, and building an email list that converts. The exact framework used to launch digitechlifestyle.com.",
     badge: "Free Guide",
     img: "/images/generated/affiliate_launch_planner_dashboard.png",
     alt: "Affiliate Launch Planner — niche research and content planning guide",
     accent: "purple" as const,
-    pdf: "/newsletter?resource=affiliate-launch-planner",
+    pdf: "/downloads/affiliate-launch-planner.html",
     affiliates: [] as { label: string; href: string }[],
   },
   {
     title: "Digital Wealth Tracker",
-    text: "Track crypto wallets, subscriptions, assets, affiliate income, and recurring costs — all in one place.",
+    text: "Most people don't know what they actually own — or what it's costing them. This tracker gives you a clear picture: crypto wallets, exchange balances, affiliate income, subscriptions, and recurring costs. One dashboard, full financial clarity.",
     badge: "Free Tracker",
     img: "/images/generated/digital_wealth_tracker_interface.png",
     alt: "Digital Wealth Tracker — crypto and income tracker template",
     accent: "purple" as const,
-    pdf: "/newsletter?resource=digital-wealth-tracker",
+    pdf: "/downloads/digital-wealth-tracker.html",
     affiliates: [] as { label: string; href: string }[],
   },
   {
     title: "Secure Your Crypto",
-    text: "Wallet types, seed phrase protection, exchange hardening, scam prevention, and a 4-week security setup plan.",
+    text: "One hack and it's gone forever. This guide covers every layer of crypto security: wallet types, seed phrase storage, exchange hardening, SIM swap protection, and scam recognition. Includes a 4-week setup plan so you can lock everything down properly — not just hope for the best.",
     badge: "Free Security Guide",
     img: "/images/generated/secure_your_crypto_future.png",
     alt: "Secure Your Crypto — hardware wallet and security guide",
     accent: "amber" as const,
-    pdf: "/newsletter?resource=secure-your-crypto",
+    pdf: "/downloads/secure-your-crypto.html",
     affiliates: [
       { label: "Ledger Hardware Wallet", href: "https://shop.ledger.com/?referral_code=FN50B8J0VZNVR" },
     ],
   },
   {
     title: "Trade Smarter",
-    text: "AI trading principles, bot types, exchange API basics, risk control, and a 30-day beginner setup plan.",
+    text: "AI is changing how people trade — but most beginners get burned before they learn the rules. This guide covers AI trading principles, the difference between bot types, how exchange APIs work, and how to manage risk properly. Includes a 30-day beginner plan to get started without blowing your account.",
     badge: "Free AI Trading Guide",
     img: "/images/generated/trade_smarter_with_crypto_exchange_tools.png",
     alt: "Trade Smarter — AI trading guide for beginners",
     accent: "amber" as const,
-    pdf: "/newsletter?resource=trade-smarter",
+    pdf: "/downloads/trade-smarter-guide.html",
     affiliates: [
       { label: "Coinbase UK", href: "https://www.coinbase.com/join/jrobertson_1A8sYA" },
       { label: "Kraken", href: "https://kraken.app.link/PzxrgWP7Qzb" },
@@ -140,44 +141,23 @@ export default function ResourcesPage() {
               gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             }}>
               {DOWNLOADS.map((d) => (
-                <div key={d.title} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <BrandImageCard
-                    src={d.img}
-                    alt={d.alt}
-                    size="thumb"
-                    title={d.title}
-                    description={d.text}
-                    badge={d.badge}
-                    ctaLabel="Get it free →"
-                    ctaHref={d.pdf}
-                    accentColor={d.accent}
-                  />
-                  {d.affiliates.length > 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", padding: "0 2px" }}>
-                      {d.affiliates.map((aff) => (
-                        <a
-                          key={aff.label}
-                          href={aff.href}
-                          target="_blank"
-                          rel="noopener sponsored"
-                          style={{
-                            fontSize: "10px",
-                            fontWeight: 700,
-                            padding: "4px 10px",
-                            borderRadius: "20px",
-                            background: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.1)",
-                            color: "var(--muted)",
-                            textDecoration: "none",
-                            letterSpacing: "0.05em",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          ↗ {aff.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
+                <div key={d.title} style={{ background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "12px", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                  <img src={d.img} alt={d.alt} loading="lazy" style={{ width: "100%", height: "160px", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+                  <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
+                    <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: d.accent === "purple" ? "var(--purple)" : "var(--amber)" }}>{d.badge}</span>
+                    <h3 style={{ fontSize: "15px", fontWeight: 800, color: "var(--fg)", margin: 0, lineHeight: 1.3 }}>{d.title}</h3>
+                    <p style={{ fontSize: "12px", color: "var(--muted)", margin: 0, lineHeight: 1.5, flex: 1 }}>{d.text}</p>
+                    <DownloadButton title={d.title} downloadUrl={d.pdf} accent={d.accent} />
+                    {d.affiliates.length > 0 && (
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "4px" }}>
+                        {d.affiliates.map((aff) => (
+                          <a key={aff.label} href={aff.href} target="_blank" rel="noopener sponsored" style={{ fontSize: "10px", fontWeight: 700, padding: "4px 10px", borderRadius: "20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--muted)", textDecoration: "none" }}>
+                            ↗ {aff.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -200,7 +180,7 @@ export default function ResourcesPage() {
           <div style={{
             marginTop: "32px",
             padding: "14px 18px",
-            background: "oklch(14% 0.02 78 / 0.4)",
+            background: "var(--bg-tint-amber)",
             border: "1px solid oklch(73% 0.17 78 / 0.2)",
             borderRadius: "10px",
             fontSize: "12px",

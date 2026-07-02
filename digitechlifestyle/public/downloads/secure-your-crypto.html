@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Your Crypto — DigiTech Lifestyle</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',sans-serif;background:#0a0a0f;color:#e2e8f0;padding:40px 20px;max-width:900px;margin:0 auto}
+  .header{text-align:center;padding:40px 0 32px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+  .logo{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#f59e0b;margin-bottom:12px}
+  h1{font-family:'Sora',sans-serif;font-size:36px;font-weight:900;line-height:1.1;color:#fff;margin-bottom:12px}
+  .subtitle{font-size:15px;color:#94a3b8;max-width:560px;margin:0 auto}
+  .section{margin-bottom:40px}
+  h2{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#f59e0b;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(245,158,11,0.2)}
+  h3{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;margin:20px 0 8px}
+  p{font-size:13px;color:#94a3b8;line-height:1.7;margin-bottom:10px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .card{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px}
+  .card-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#f59e0b;margin-bottom:6px;letter-spacing:0.04em}
+  .card-icon{font-size:20px;margin-bottom:8px}
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .tag{display:inline-block;background:#f59e0b22;color:#f59e0b;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+  .table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+  .table th{text-align:left;padding:8px 12px;background:#13131a;color:#f59e0b;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.05);color:#94a3b8;vertical-align:top}
+  .checklist{list-style:none;padding:0}
+  .checklist li{padding:6px 0 6px 26px;position:relative;font-size:12px;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .checklist li::before{content:"☐";position:absolute;left:0;color:#f59e0b;font-size:13px}
+  .step-box{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+  .step-num{flex-shrink:0;width:28px;height:28px;background:#f59e0b22;color:#f59e0b;border-radius:50%;font-size:12px;font-weight:800;text-align:center;line-height:28px;font-family:'Sora',sans-serif}
+  .step-content{}
+  .step-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:4px}
+  .step-text{font-size:12px;color:#94a3b8;line-height:1.6}
+  .week-box{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+  .week-label{font-family:'Sora',sans-serif;font-size:11px;font-weight:800;color:#f59e0b;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase}
+  .alert-box{background:#13131a;border-left:3px solid #ef4444;border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+  .alert-box p{color:#fca5a5;margin:0;font-size:12px;line-height:1.6}
+  .alert-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#ef4444;margin-bottom:6px}
+  .tip-box{background:#13131a;border-left:3px solid #f59e0b;border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+  .tip-box p{color:#cbd5e1;margin:0;font-size:12px;line-height:1.6}
+  .tip-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#f59e0b;margin-bottom:6px}
+  .affiliate-box{background:#13131a;border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:16px 18px;margin:16px 0}
+  .affiliate-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;margin-bottom:8px}
+  .affiliate-box p{font-size:12px;color:#94a3b8;margin:0 0 10px}
+  .affiliate-btn{display:inline-block;background:#f59e0b;color:#0a0a0f;font-weight:800;font-size:12px;padding:8px 16px;border-radius:6px;text-decoration:none;font-family:'Sora',sans-serif}
+  .footer{text-align:center;padding:32px 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:40px;color:#475569;font-size:12px}
+  .footer a{color:#f59e0b;text-decoration:none}
+  @media print{body{background:#fff;color:#000}.card,.step-box,.week-box,.alert-box,.tip-box{background:#fafafa;border-color:#ddd}.alert-box{border-color:#ef4444}.tip-box{border-color:#d97706}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">DigiTech Lifestyle</div>
+  <h1>Secure Your Crypto</h1>
+  <p class="subtitle">Every layer of crypto security explained — from wallet types and seed phrase storage to exchange hardening, SIM swap protection, and a 4-week setup plan.</p>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section">
+  <h2>📋 Why This Matters</h2>
+  <p>Crypto is one of the only asset classes where a single mistake can result in permanent, unrecoverable loss. No bank to call. No fraud protection. No reversals. One phishing link, one exposed seed phrase, or one weak exchange password — and it's gone.</p>
+  <p>This guide covers every realistic attack vector UK crypto holders face and gives you a layered defence. Work through the 4-week plan at the end and you'll be more secure than 95% of crypto holders.</p>
+  <div class="tag-row">
+    <span class="tag">Wallets</span>
+    <span class="tag">Seed Phrases</span>
+    <span class="tag">Exchange Security</span>
+    <span class="tag">SIM Swap</span>
+    <span class="tag">Scam Detection</span>
+    <span class="tag">2FA</span>
+    <span class="tag">4-Week Plan</span>
+  </div>
+</div>
+
+<!-- WALLET TYPES -->
+<div class="section">
+  <h2>🔐 Layer 1 — Wallet Types</h2>
+  <p>Not all crypto storage is equal. Understanding the difference between hot and cold storage is the single most important security decision you'll make.</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Connected?</th>
+        <th>Best For</th>
+        <th>Risk Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Exchange (custodial)</strong></td><td>Always online</td><td>Trading, small amounts</td><td>Medium — you don't hold the keys</td></tr>
+      <tr><td><strong>Software wallet (hot)</strong></td><td>Online when app open</td><td>Regular DeFi use, moderate amounts</td><td>Medium-High — keys on internet-connected device</td></tr>
+      <tr><td><strong>Hardware wallet (cold)</strong></td><td>Offline by default</td><td>Long-term storage, significant holdings</td><td>Low — private keys never touch the internet</td></tr>
+      <tr><td><strong>Paper wallet</strong></td><td>Never online</td><td>Very long-term storage only</td><td>Low (digital) / High (physical damage/loss)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <div class="tip-title">💡 The Golden Rule</div>
+    <p>Anything you're not actively trading should be in cold storage. If your total crypto holdings exceed £500, a hardware wallet is not optional — it's the minimum responsible step.</p>
+  </div>
+
+  <h3>Which Hardware Wallet?</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Ledger (Nano X / Flex)</div>
+      <p style="font-size:12px;margin:0 0 6px">Most widely supported device. Bluetooth for mobile. Supports 5,500+ coins. Closed-source secure element but well-audited. Recommended for most users.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Trezor (Model T / Safe 3)</div>
+      <p style="font-size:12px;margin:0 0 6px">Open-source firmware. No Bluetooth (some see this as a feature). Slightly easier interface for beginners. Strong community trust.</p>
+    </div>
+  </div>
+
+  <div class="affiliate-box">
+    <div class="affiliate-label">Recommended Hardware</div>
+    <p>Ledger is available direct with free UK shipping. Using this link supports DigiTech Lifestyle at no extra cost to you — affiliate disclosure applies.</p>
+    <a href="https://shop.ledger.com/?referral_code=FN50B8J0VZNVR" class="affiliate-btn">Get a Ledger Hardware Wallet →</a>
+  </div>
+</div>
+
+<!-- SEED PHRASES -->
+<div class="section">
+  <h2>📝 Layer 2 — Seed Phrase Security</h2>
+  <p>Your seed phrase (12 or 24 words) is the master key to your wallet. Anyone who has it, controls everything. It cannot be changed — lose it and lose access forever; expose it and lose everything.</p>
+
+  <div class="alert-box">
+    <div class="alert-title">🚨 Absolute Rules</div>
+    <p>1. Never photograph your seed phrase. Photos sync to cloud storage.<br>
+    2. Never type it into any website, app, or AI chatbot.<br>
+    3. Never store it in a password manager, notes app, or email.<br>
+    4. Never say it out loud on a video call.<br>
+    5. No legitimate wallet, exchange, or support team will ever ask for it.</p>
+  </div>
+
+  <h3>How to Store It Safely</h3>
+  <ul class="checklist">
+    <li>Write it by hand on paper — use a ballpoint pen, not pencil (fades)</li>
+    <li>Create two physical copies stored in different physical locations</li>
+    <li>Consider a fireproof, waterproof metal backup (Cryptosteel, Bilodal, or similar)</li>
+    <li>Store one copy in a home safe and one with a trusted family member or solicitor</li>
+    <li>Do not laminate paper copies — laminate can peel and obscure words over time</li>
+    <li>Test recovery before depositing significant funds — restore on a spare device to verify your phrase works</li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-title">💡 Passphrase (25th Word)</div>
+    <p>Most hardware wallets support an optional extra passphrase — effectively a 25th word added to your seed. Even if someone finds your seed phrase, they can't access your funds without the passphrase. Use it for significant holdings. Memorise it or store separately from your seed phrase — never together.</p>
+  </div>
+</div>
+
+<!-- EXCHANGE HARDENING -->
+<div class="section">
+  <h2>🏦 Layer 3 — Exchange Hardening</h2>
+  <p>You'll likely hold some crypto on exchanges for trading. Make your exchange account as hard to breach as possible.</p>
+
+  <div class="step-box">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">Strong Unique Password</div>
+      <div class="step-text">Use a password manager (Bitwarden is free and open-source). Generate a 20+ character random password for every exchange. Never reuse passwords. Exchange breaches are common — a reused password means one breach compromises everything.</div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Use an Authenticator App — Not SMS 2FA</div>
+      <div class="step-text">SMS 2FA is vulnerable to SIM swapping (see Layer 4). Use Google Authenticator, Authy, or — best of all — a hardware security key like a YubiKey. Disable SMS 2FA wherever possible.</div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Enable Withdrawal Whitelist</div>
+      <div class="step-text">Most exchanges let you whitelist specific withdrawal addresses. New addresses require email confirmation and a 24-48 hour delay. Even if someone logs in to your account, they can't instantly drain it.</div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">Use a Dedicated Email Address</div>
+      <div class="step-text">Create a separate email address used only for crypto exchanges — never used for newsletters, signups, or general browsing. This email has no public trail. Enable 2FA on it too.</div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">Anti-Phishing Code</div>
+      <div class="step-text">Coinbase, Binance, Kraken and most major exchanges let you set a personalised anti-phishing code. This code appears in every legitimate email from them. Any email without it is fake.</div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <div class="step-title">Only Use FCA-Registered Exchanges (UK)</div>
+      <div class="step-text">In the UK, crypto exchanges handling UK customers must register with the FCA. Coinbase, Kraken, Bitstamp, and Gemini are all FCA-registered. Binance.com was previously delisted — use Binance UK (binance.com/en-GB) which is FCA-registered.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SIM SWAP -->
+<div class="section">
+  <h2>📱 Layer 4 — SIM Swap Protection</h2>
+  <p>SIM swapping is when an attacker convinces your mobile network to transfer your number to a SIM they control. They then bypass any SMS-based 2FA on your accounts. It's more common than most people think — and targeted attacks often focus on known crypto holders.</p>
+
+  <h3>How to Protect Yourself</h3>
+  <ul class="checklist">
+    <li>Switch all exchange 2FA from SMS to an authenticator app or hardware key</li>
+    <li>Call your mobile network and add a SIM lock — a PIN required before any SIM transfer</li>
+    <li>EE, O2, Vodafone, and Three all offer this — ask for "SIM swap protection" or "port freeze"</li>
+    <li>Use a Google Voice or separate VOIP number for exchange account registration if possible</li>
+    <li>Do not publicise your crypto holdings on social media — you become a target</li>
+    <li>Check "Have I Been Pwned" (haveibeenpwned.com) to see if your email is in known data breaches</li>
+  </ul>
+
+  <div class="alert-box">
+    <div class="alert-title">🚨 If You Think You've Been SIM Swapped</div>
+    <p>If your phone suddenly loses signal for no reason, act immediately. Call your network from another phone. Then contact all exchanges and request a temporary account lock. Time matters — most account drains happen within minutes of a SIM swap.</p>
+  </div>
+</div>
+
+<!-- SCAM RECOGNITION -->
+<div class="section">
+  <h2>🎣 Layer 5 — Scam Recognition</h2>
+  <p>In my experience looking at scams reported to the FCA and Action Fraud, the majority of UK crypto losses aren't from hacks — they're from social engineering. Knowing the playbook makes you almost immune.</p>
+
+  <h3>The Most Common Attacks</h3>
+  <table class="table">
+    <thead>
+      <tr><th>Scam Type</th><th>How It Looks</th><th>Red Flag</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Fake exchange</strong></td><td>Professional-looking site, often paid Google ad at top of results</td><td>Not in your bookmarks. URL is slightly off (coinb4se.com)</td></tr>
+      <tr><td><strong>Recovery scam</strong></td><td>"We can recover your lost crypto" — charges upfront fee, disappears</td><td>No legitimate recovery service exists for lost seed phrases</td></tr>
+      <tr><td><strong>Romance scam (pig butchering)</strong></td><td>Online relationship, gradual move to crypto "investment platform"</td><td>Unsolicited contact + always profitable + pushes you to a specific platform</td></tr>
+      <tr><td><strong>Fake support</strong></td><td>Responds to your tweet/forum post, offers help via DM</td><td>Exchanges never reach out to you unprompted — report them</td></tr>
+      <tr><td><strong>Approval phishing</strong></td><td>Fake DeFi site asks wallet to approve a transaction</td><td>You didn't initiate it. Check what you're approving before signing</td></tr>
+      <tr><td><strong>Airdrop scam</strong></td><td>"You've received free tokens" — click to claim</td><td>Unsolicited tokens. Never interact with unknown tokens in your wallet</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <div class="tip-title">💡 The Universal Test</div>
+    <p>Any opportunity that promises guaranteed returns, requires urgency, or pressures you not to seek outside advice is a scam. No exceptions. Legitimate investments don't require you to act before thinking.</p>
+  </div>
+
+  <h3>Safe Browsing Habits</h3>
+  <ul class="checklist">
+    <li>Bookmark every exchange and DeFi app you use — never Google them again</li>
+    <li>Check the URL before entering any credentials or connecting a wallet</li>
+    <li>Use a separate browser profile or even device for crypto activity</li>
+    <li>Disable browser extensions on crypto sites — some extensions steal wallet data</li>
+    <li>Never click links in emails claiming to be from exchanges — go to the site direct</li>
+    <li>Report scam attempts to Action Fraud (actionfraud.police.uk) and the FCA</li>
+  </ul>
+</div>
+
+<!-- 4-WEEK PLAN -->
+<div class="section">
+  <h2>📅 4-Week Security Setup Plan</h2>
+  <p>Work through this plan one week at a time. Don't rush it. By the end of week 4, you'll have the full security stack in place.</p>
+
+  <div class="week-box">
+    <div class="week-label">Week 1 — Foundations</div>
+    <ul class="checklist" style="margin:0">
+      <li>Install Bitwarden (free) and migrate all passwords to it</li>
+      <li>Generate new strong unique passwords for every exchange</li>
+      <li>Enable 2FA on all exchange accounts using an authenticator app</li>
+      <li>Disable SMS 2FA on all exchanges where possible</li>
+      <li>Create a dedicated email address for crypto accounts only</li>
+    </ul>
+  </div>
+
+  <div class="week-box">
+    <div class="week-label">Week 2 — Hardware Wallet Setup</div>
+    <ul class="checklist" style="margin:0">
+      <li>Order a hardware wallet from the official manufacturer site only</li>
+      <li>Set it up on a clean device — not a shared family computer</li>
+      <li>Write down your seed phrase by hand, create two copies</li>
+      <li>Store copies in two separate physical locations</li>
+      <li>Test recovery before depositing any funds</li>
+      <li>Transfer significant holdings from exchanges to hardware wallet</li>
+    </ul>
+  </div>
+
+  <div class="week-box">
+    <div class="week-label">Week 3 — Exchange Hardening</div>
+    <ul class="checklist" style="margin:0">
+      <li>Enable withdrawal address whitelisting on all exchanges</li>
+      <li>Set up anti-phishing codes where available</li>
+      <li>Review and remove any unused exchange accounts or connected apps</li>
+      <li>Call your mobile network — request SIM swap protection / port freeze</li>
+      <li>Bookmark every exchange URL you use — delete browser history for those sites</li>
+    </ul>
+  </div>
+
+  <div class="week-box">
+    <div class="week-label">Week 4 — Ongoing Habits</div>
+    <ul class="checklist" style="margin:0">
+      <li>Check haveibeenpwned.com — update passwords for any breached emails</li>
+      <li>Review all wallet approvals on revoke.cash (revoke any unused DeFi permissions)</li>
+      <li>Set a monthly calendar reminder: review exchange permissions and app connections</li>
+      <li>Tell a trusted family member where your seed phrase backups are stored</li>
+      <li>Do NOT tell them the actual phrase — tell them the location and to contact your solicitor</li>
+    </ul>
+  </div>
+</div>
+
+<!-- QUICK REFERENCE -->
+<div class="section">
+  <h2>⚡ Quick Reference Card</h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">✅ Always Do</div>
+      <ul class="checklist" style="margin:0">
+        <li>Use authenticator app 2FA</li>
+        <li>Hardware wallet for holdings over £500</li>
+        <li>Unique password per exchange</li>
+        <li>Verify URLs before connecting wallet</li>
+        <li>Withdrawal address whitelisting</li>
+        <li>Store seed phrase offline, two locations</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">🚫 Never Do</div>
+      <ul class="checklist" style="margin:0">
+        <li>Share your seed phrase with anyone</li>
+        <li>Enter seed phrase online</li>
+        <li>Use SMS as your only 2FA</li>
+        <li>Click links in exchange emails</li>
+        <li>Leave large holdings on exchanges</li>
+        <li>Trust "guaranteed return" offers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>© 2026 <a href="https://digitechlifestyle.com">DigiTech Lifestyle</a> — Educational content only. Not financial advice. Always do your own research.</p>
+  <p style="margin-top:6px">Affiliate disclosure: This guide contains affiliate links. We earn a small commission if you purchase — at no extra cost to you.</p>
+</div>
+
+</body>
+</html>

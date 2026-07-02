@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Launch Planner — DigiTech Lifestyle</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',sans-serif;background:#0a0a0f;color:#e2e8f0;padding:40px 20px;max-width:900px;margin:0 auto}
+  .header{text-align:center;padding:40px 0 32px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+  .logo{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#a855f7;margin-bottom:12px}
+  h1{font-family:'Sora',sans-serif;font-size:36px;font-weight:900;line-height:1.1;color:#fff;margin-bottom:12px}
+  .subtitle{font-size:15px;color:#94a3b8;max-width:540px;margin:0 auto}
+  .section{margin-bottom:40px}
+  h2{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#a855f7;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(168,85,247,0.2)}
+  h3{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;margin:20px 0 8px}
+  p{font-size:13px;color:#94a3b8;line-height:1.7;margin-bottom:10px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .card{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px}
+  .card-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#a855f7;margin-bottom:8px;letter-spacing:0.04em}
+  .table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+  .table th{text-align:left;padding:8px 12px;background:#13131a;color:#a855f7;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.05);color:#94a3b8;vertical-align:top}
+  .table td:first-child{color:#e2e8f0;font-weight:600}
+  .checklist{list-style:none;padding:0}
+  .checklist li{padding:7px 0 7px 28px;position:relative;font-size:13px;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .checklist li::before{content:"☐";position:absolute;left:0;color:#a855f7;font-size:14px;line-height:1}
+  .step-box{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+  .step-num{min-width:28px;height:28px;background:#a855f722;color:#a855f7;border-radius:50%;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .step-content h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:4px}
+  .step-content p{font-size:12px;color:#94a3b8;margin:0}
+  .week-box{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+  .week-label{font-family:'Sora',sans-serif;font-size:11px;font-weight:800;color:#a855f7;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase}
+  .score-box{background:#13131a;border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+  .score-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#a855f7;margin-bottom:6px}
+  .niche-field{background:#0d0d14;border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:10px 14px;font-size:12px;color:#475569;margin-bottom:8px;font-style:italic}
+  .tag{display:inline-block;background:#a855f722;color:#a855f7;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-right:6px;margin-bottom:6px}
+  .footer{text-align:center;padding:32px 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:40px;color:#475569;font-size:12px}
+  .footer a{color:#a855f7;text-decoration:none}
+  @media print{body{background:#fff;color:#000}.card,.week-box,.step-box,.score-box{background:#fafafa;border-color:#ddd}.niche-field{background:#f5f5f5}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">DigiTech Lifestyle</div>
+  <h1>Affiliate Launch Planner</h1>
+  <p class="subtitle">Choose your niche, pick affiliate offers, map content clusters, and set up email capture — step by step</p>
+</div>
+
+<!-- SECTION 1: NICHE SELECTION -->
+<div class="section">
+  <h2>🎯 Step 1 — Choose Your Niche</h2>
+  <p>A profitable affiliate niche sits at the intersection of three things: what you can write about credibly, what has affiliate programmes worth promoting, and what people actively search for and buy.</p>
+
+  <h3>Niche Evaluation Framework</h3>
+  <table class="table">
+    <tr><th>Criteria</th><th>Questions to ask</th><th>Green flag</th></tr>
+    <tr><td>Interest / knowledge</td><td>Can you write 20 articles on this without running out of ideas?</td><td>Yes, easily</td></tr>
+    <tr><td>Search demand</td><td>Are people actively searching for advice, reviews, or how-tos?</td><td>Strong evergreen intent</td></tr>
+    <tr><td>Affiliate programmes</td><td>Are there products/services with 20%+ commission or £30+ per sale?</td><td>Multiple options available</td></tr>
+    <tr><td>Buyer intent</td><td>Do searchers have a problem that requires buying something to solve?</td><td>High commercial intent</td></tr>
+    <tr><td>Competition</td><td>Are the top-ranking pages well-optimised, or are there gaps to fill?</td><td>Some gaps visible</td></tr>
+  </table>
+
+  <h3>My Niche Planner</h3>
+  <div class="niche-field">Niche: ______________________________</div>
+  <div class="niche-field">Target audience: ______________________________</div>
+  <div class="niche-field">Primary buyer problem I solve: ______________________________</div>
+  <div class="niche-field">Why I'm credible in this niche: ______________________________</div>
+</div>
+
+<!-- SECTION 2: AFFILIATE PROGRAMMES -->
+<div class="section">
+  <h2>💰 Step 2 — Pick Your Affiliate Offers</h2>
+  <p>Aim for a mix: 1–2 high-ticket offers (£50+ commission), 2–3 mid-tier (£15–50 commission), and 1–2 recurring (monthly commission). Don't promote everything — promote what you'd genuinely recommend.</p>
+
+  <h3>Offer Evaluation Checklist</h3>
+  <ul class="checklist">
+    <li>Commission rate is at least 20%, or flat fee of £30+ per sale</li>
+    <li>Cookie window is 30 days or more (longer = more chance of attribution)</li>
+    <li>Product has good reviews — you've verified it works</li>
+    <li>The product solves a real problem for your audience</li>
+    <li>Affiliate dashboard shows conversion rates and EPC (earnings per click)</li>
+    <li>Payment is reliable — check forums, affiliate groups for red flags</li>
+    <li>Marketing materials available (banners, email swipes, product images)</li>
+  </ul>
+
+  <h3>Offer Comparison Table</h3>
+  <table class="table">
+    <tr><th>Product</th><th>Network</th><th>Commission</th><th>Cookie</th><th>Avg. conversion</th><th>Notes</th></tr>
+    <tr><td>[Product 1]</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>[Product 2]</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>[Product 3]</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>[Product 4]</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>[Product 5]</td><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h3>Affiliate Networks Worth Joining</h3>
+  <div class="grid2">
+    <div class="card"><div class="card-title">Impact Radius</div><p style="font-size:12px;margin:0">Major brands, SaaS products, fintech. Strong UK presence. Good dashboard.</p></div>
+    <div class="card"><div class="card-title">ShareASale</div><p style="font-size:12px;margin:0">Wide range of niches. Reliable payments. Good for e-commerce and software.</p></div>
+    <div class="card"><div class="card-title">Awin</div><p style="font-size:12px;margin:0">Strong UK/EU focus. Banks, retailers, financial services. Large network.</p></div>
+    <div class="card"><div class="card-title">Direct Programmes</div><p style="font-size:12px;margin:0">Many SaaS tools have their own affiliate portals. Often higher commissions than network deals.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: CONTENT CLUSTER MAP -->
+<div class="section">
+  <h2>📝 Step 3 — Map Your Content Clusters</h2>
+  <p>A content cluster is a main pillar page surrounded by supporting articles that all link back to it. This structure improves SEO and guides readers towards your affiliate offer.</p>
+
+  <h3>Cluster Structure</h3>
+  <div class="step-box"><div class="step-num">P</div><div class="step-content"><h4>Pillar Page (main)</h4><p>"Best [Product Category] in 2026 — Compared & Reviewed". 2,000+ words. Targets the broadest, most commercial keyword. Links to all supporting articles.</p></div></div>
+  <div class="step-box"><div class="step-num">S</div><div class="step-content"><h4>Supporting Article 1 — Review</h4><p>"[Product A] Review: Is it worth it in 2026?" 1,500 words. In-depth single review. Links to pillar page and comparison articles.</p></div></div>
+  <div class="step-box"><div class="step-num">S</div><div class="step-content"><h4>Supporting Article 2 — Comparison</h4><p>"[Product A] vs [Product B]: Which is better for [Audience]?" 1,500 words. Direct comparison. High buyer intent.</p></div></div>
+  <div class="step-box"><div class="step-num">S</div><div class="step-content"><h4>Supporting Article 3 — How-to</h4><p>"How to [Use Product / Achieve Outcome] with [Tool]." Informational, builds trust. Links to review and pillar.</p></div></div>
+  <div class="step-box"><div class="step-num">S</div><div class="step-content"><h4>Supporting Article 4 — Problem/Solution</h4><p>"The best way to solve [Problem]" — educational article that naturally leads to the product recommendation.</p></div></div>
+
+  <h3>My Content Cluster Planner</h3>
+  <div class="score-box">
+    <div class="score-title">Cluster 1 — [Offer Name]</div>
+    <table class="table" style="margin:8px 0 0">
+      <tr><td style="width:35%">Pillar page title</td><td></td></tr>
+      <tr><td>Target keyword</td><td></td></tr>
+      <tr><td>Supporting article 1</td><td></td></tr>
+      <tr><td>Supporting article 2</td><td></td></tr>
+      <tr><td>Supporting article 3</td><td></td></tr>
+      <tr><td>Supporting article 4</td><td></td></tr>
+      <tr><td>Affiliate product to link</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 4: EMAIL CAPTURE -->
+<div class="section">
+  <h2>📧 Step 4 — Set Up Email Capture</h2>
+  <p>Email is your most reliable distribution channel. Build a list from day one. Every affiliate site should have an opt-in connected to the content.</p>
+
+  <h3>Email Capture Checklist</h3>
+  <ul class="checklist">
+    <li>Choose email platform (MailerLite or Kit — both have free plans)</li>
+    <li>Create a lead magnet relevant to your niche (checklist, cheat sheet, template)</li>
+    <li>Set up landing page with opt-in form</li>
+    <li>Embed opt-in form in: sidebar, end of every article, exit-intent popup</li>
+    <li>Build 3-email welcome sequence (welcome, best resource, engagement ask)</li>
+    <li>Set up weekly or fortnightly newsletter cadence</li>
+    <li>Add affiliate links naturally inside newsletter content (not every email)</li>
+  </ul>
+
+  <h3>Lead Magnet Ideas by Niche</h3>
+  <table class="table">
+    <tr><th>Niche</th><th>Lead magnet idea</th></tr>
+    <tr><td>Crypto / finance</td><td>Crypto beginner checklist, exchange comparison sheet, tax tracker template</td></tr>
+    <tr><td>AI / tech tools</td><td>Prompt library, tool comparison sheet, automation checklist</td></tr>
+    <tr><td>Web hosting / SaaS</td><td>"Which hosting is right for you?" quiz or comparison guide</td></tr>
+    <tr><td>Health / fitness</td><td>Meal plan template, workout log, supplement comparison</td></tr>
+    <tr><td>Personal finance</td><td>Budget spreadsheet, savings tracker, debt payoff calculator</td></tr>
+  </table>
+</div>
+
+<!-- SECTION 5: LAUNCH TIMELINE -->
+<div class="section">
+  <h2>🚀 Launch Timeline — 60 Days</h2>
+  <div class="week-box">
+    <div class="week-label">Days 1–14 — Foundation</div>
+    <ul class="checklist">
+      <li>Niche selected and validated with keyword research</li>
+      <li>2–3 affiliate programmes applied to and approved</li>
+      <li>Domain registered and hosting set up</li>
+      <li>Website built (WordPress or simple static site)</li>
+      <li>Email platform set up with lead magnet and welcome sequence</li>
+    </ul>
+  </div>
+  <div class="week-box">
+    <div class="week-label">Days 15–30 — Content</div>
+    <ul class="checklist">
+      <li>Pillar page written and published</li>
+      <li>4 supporting articles written and published</li>
+      <li>All articles internally linked to pillar page</li>
+      <li>Affiliate links placed naturally (not forced) in relevant articles</li>
+      <li>Email opt-in embedded across all pages</li>
+    </ul>
+  </div>
+  <div class="week-box">
+    <div class="week-label">Days 31–45 — Distribute</div>
+    <ul class="checklist">
+      <li>All articles shared on social (LinkedIn, X, Pinterest)</li>
+      <li>2 more supporting articles published</li>
+      <li>Guest post opportunity or link-building started</li>
+      <li>Google Search Console set up and site submitted</li>
+      <li>First newsletter sent to subscribers</li>
+    </ul>
+  </div>
+  <div class="week-box">
+    <div class="week-label">Days 46–60 — Optimise</div>
+    <ul class="checklist">
+      <li>Check Google Search Console for impressions and clicks</li>
+      <li>Identify which articles get traffic — add more affiliate CTAs there</li>
+      <li>A/B test different CTA placements (top, inline, end of article)</li>
+      <li>Review affiliate dashboard: any clicks? Any conversions?</li>
+      <li>Plan second content cluster based on performance data</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 6: COMPLIANCE -->
+<div class="section">
+  <h2>⚖️ UK Compliance Checklist</h2>
+  <p>Affiliate marketing in the UK is regulated by the ASA (Advertising Standards Authority) and the CAP Code. Non-disclosure can result in formal complaints and reputational damage.</p>
+  <ul class="checklist">
+    <li>All affiliate links labelled with "AD", "Sponsored", or "Affiliate link"</li>
+    <li>Disclosure is visible before the reader clicks — not buried in footer</li>
+    <li>Privacy policy mentions use of affiliate links and cookies</li>
+    <li>Cookie consent banner in place (UK PECR compliance)</li>
+    <li>No false or misleading claims about products you promote</li>
+    <li>If promoting financial products: FCA regulatory status disclosed</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>© 2026 DigiTech Lifestyle — <a href="https://www.digitechlifestyle.com">digitechlifestyle.com</a></p>
+  <p style="margin-top:6px">For educational purposes only. Not financial advice.</p>
+</div>
+</body>
+</html>

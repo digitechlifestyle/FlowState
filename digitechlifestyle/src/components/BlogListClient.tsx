@@ -128,7 +128,7 @@ export default function BlogListClient({ articles }: { articles: Article[] }) {
 
             <div className="newsletter-strip">
               <h2>Stay ahead of the market — free</h2>
-              <p>Join 4,200+ readers getting weekly crypto, DeFi, blockchain and AI insights every Thursday. No spam.</p>
+              <p>Weekly crypto, DeFi, blockchain and AI insights every Thursday. Join our community of nearly 5,000 across YouTube, LinkedIn, X, and Facebook. No spam.</p>
               <form className="newsletter-form" action="/newsletter" method="GET">
                 <input type="email" name="email" placeholder="Enter your email address" required autoComplete="email" />
                 <button type="submit">Join free</button>

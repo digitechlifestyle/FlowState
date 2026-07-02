@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Wealth Tracker — DigiTech Lifestyle</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Manrope',sans-serif;background:#0a0a0f;color:#e2e8f0;padding:40px 20px;max-width:900px;margin:0 auto}
+  .header{text-align:center;padding:40px 0 32px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+  .logo{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#22c55e;margin-bottom:12px}
+  h1{font-family:'Sora',sans-serif;font-size:36px;font-weight:900;line-height:1.1;color:#fff;margin-bottom:12px}
+  .subtitle{font-size:15px;color:#94a3b8;max-width:540px;margin:0 auto}
+  .section{margin-bottom:40px}
+  h2{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#22c55e;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(34,197,94,0.2)}
+  h3{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;margin:20px 0 8px}
+  p{font-size:13px;color:#94a3b8;line-height:1.7;margin-bottom:10px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .card{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px 18px}
+  .card-title{font-family:'Sora',sans-serif;font-size:12px;font-weight:800;color:#22c55e;margin-bottom:8px;letter-spacing:0.04em}
+  .table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+  .table th{text-align:left;padding:8px 12px;background:#13131a;color:#22c55e;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.05);color:#94a3b8;vertical-align:top}
+  .table td:first-child{color:#e2e8f0;font-weight:600}
+  .table td.amount{color:#22c55e;font-weight:700;font-family:monospace}
+  .table td.empty{color:#334155;font-style:italic}
+  .checklist{list-style:none;padding:0}
+  .checklist li{padding:7px 0 7px 28px;position:relative;font-size:13px;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .checklist li::before{content:"☐";position:absolute;left:0;color:#22c55e;font-size:14px;line-height:1}
+  .tracker-section{background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:18px;margin-bottom:14px}
+  .tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .tracker-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:#22c55e}
+  .tracker-total{font-family:monospace;font-size:14px;font-weight:700;color:#22c55e}
+  .input-row{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:11px}
+  .input-row.header{background:#0d0d14}
+  .input-row div{padding:7px 10px;color:#94a3b8}
+  .input-row.header div{color:#22c55e;font-weight:700;font-size:10px;letter-spacing:0.05em;text-transform:uppercase}
+  .input-row.total{background:#0d1a0d;border-top:1px solid rgba(34,197,94,0.2)}
+  .input-row.total div{color:#22c55e;font-weight:700}
+  .tip-box{background:#0d1a0d;border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:12px 16px;margin:16px 0}
+  .tip-box strong{color:#22c55e;font-size:12px}
+  .tip-box p{font-size:12px;color:#86efac;margin:4px 0 0}
+  .footer{text-align:center;padding:32px 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:40px;color:#475569;font-size:12px}
+  .footer a{color:#22c55e;text-decoration:none}
+  @media print{body{background:#fff;color:#000}.card,.tracker-section{background:#fafafa;border-color:#ddd}.input-row.header{background:#f5f5f5}.input-row.total{background:#f0fdf4}.tip-box{background:#f0fdf4;border-color:#86efac}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">DigiTech Lifestyle</div>
+  <h1>Digital Wealth Tracker</h1>
+  <p class="subtitle">Track crypto wallets, subscriptions, assets, affiliate income, and recurring costs — everything in one place</p>
+</div>
+
+<!-- HOW TO USE -->
+<div class="section">
+  <h2>📋 How to Use This Tracker</h2>
+  <p>This tracker has six sections: crypto holdings, digital assets, subscriptions, affiliate income, recurring income, and a monthly net summary. Fill in the tables below, or use them as a template to build your own spreadsheet in Google Sheets or Notion.</p>
+  <div class="tip-box">
+    <strong>💡 Review cadence</strong>
+    <p>Update crypto prices and balances monthly. Review subscriptions and cancel unused ones quarterly. Update affiliate income weekly to track trends.</p>
+  </div>
+</div>
+
+<!-- TAB 1: CRYPTO HOLDINGS -->
+<div class="section">
+  <h2>₿ Crypto Holdings</h2>
+  <div class="tracker-section">
+    <div class="tracker-header">
+      <div class="tracker-title">Wallet & Exchange Balances</div>
+      <div class="tracker-total">Total: £ ______</div>
+    </div>
+    <div style="overflow-x:auto">
+      <div class="input-row header"><div>Asset</div><div>Amount held</div><div>Current price (£)</div><div>Total value (£)</div><div>Platform / wallet</div><div>Notes</div></div>
+      <div class="input-row"><div>Bitcoin (BTC)</div><div class="empty">0.000</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div></div>
+      <div class="input-row"><div>Ethereum (ETH)</div><div class="empty">0.000</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div></div>
+      <div class="input-row"><div>Solana (SOL)</div><div class="empty">0.000</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div></div>
+      <div class="input-row"><div>Other coin 1</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div></div>
+      <div class="input-row"><div>Other coin 2</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div><div class="empty">—</div></div>
+      <div class="input-row total"><div>TOTAL</div><div></div><div></div><div>£ ______</div><div></div><div></div></div>
+    </div>
+  </div>
+
+  <h3>Wallet Inventory</h3>
+  <table class="table">
+    <tr><th>Wallet type</th><th>Platform / device</th><th>Main holdings</th><th>Backup secured?</th></tr>
+    <tr><td>Hardware wallet</td><td class="empty">e.g. Ledger Nano X</td><td class="empty">BTC, ETH</td><td class="empty">☐ Yes</td></tr>
+    <tr><td>Software wallet</td><td class="empty">e.g. MetaMask</td><td class="empty">DeFi tokens</td><td class="empty">☐ Yes</td></tr>
+    <tr><td>Exchange wallet</td><td class="empty">e.g. Coinbase</td><td class="empty">Trading balance</td><td class="empty">N/A</td></tr>
+    <tr><td>Exchange wallet</td><td class="empty">e.g. Kraken</td><td class="empty">Staking</td><td class="empty">N/A</td></tr>
+  </table>
+</div>
+
+<!-- TAB 2: DIGITAL ASSETS -->
+<div class="section">
+  <h2>🌐 Digital Assets</h2>
+  <div class="tracker-section">
+    <div class="tracker-header">
+      <div class="tracker-title">Websites, Domains & Digital Properties</div>
+    </div>
+    <table class="table" style="margin:0">
+      <tr><th>Asset</th><th>Type</th><th>Platform</th><th>Monthly revenue (£)</th><th>Est. value (£)</th><th>Status</th></tr>
+      <tr><td class="empty">Website 1</td><td class="empty">Blog / affiliate</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">Active</td></tr>
+      <tr><td class="empty">Domain name</td><td class="empty">Domain</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">Parked</td></tr>
+      <tr><td class="empty">Online course</td><td class="empty">Digital product</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="empty">NFT / digital art</td><td class="empty">Collectible</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 3: SUBSCRIPTIONS -->
+<div class="section">
+  <h2>🔁 Subscriptions & Tools</h2>
+  <p>Most people overspend on subscriptions by £50–£150/month. Audit this list quarterly and cancel anything you haven't used in 30 days.</p>
+  <div class="tracker-section">
+    <div class="tracker-header">
+      <div class="tracker-title">Active Subscriptions</div>
+      <div class="tracker-total">Monthly total: £ ______</div>
+    </div>
+    <table class="table" style="margin:0">
+      <tr><th>Tool / service</th><th>Category</th><th>Monthly cost (£)</th><th>Annual cost (£)</th><th>Last used</th><th>Keep?</th></tr>
+      <tr><td class="empty">ChatGPT Plus</td><td class="empty">AI</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Hosting</td><td class="empty">Tech</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Email platform</td><td class="empty">Marketing</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Design tool</td><td class="empty">Creative</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">SEO tool</td><td class="empty">Marketing</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Social scheduler</td><td class="empty">Marketing</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Project manager</td><td class="empty">Productivity</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Automation tool</td><td class="empty">Tech</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td></td><td class="amount">£ ______</td><td class="amount">£ ______</td><td></td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 4: AFFILIATE INCOME -->
+<div class="section">
+  <h2>💸 Affiliate Income Tracker</h2>
+  <div class="tracker-section">
+    <div class="tracker-header">
+      <div class="tracker-title">Monthly Affiliate Earnings</div>
+      <div class="tracker-total">This month: £ ______</div>
+    </div>
+    <table class="table" style="margin:0">
+      <tr><th>Programme</th><th>Network</th><th>Clicks</th><th>Conversions</th><th>Commission (£)</th><th>Payment date</th></tr>
+      <tr><td class="empty">Programme 1</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="empty">Programme 2</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="empty">Programme 3</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="empty">Programme 4</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td></td><td></td><td></td><td class="amount">£ ______</td><td></td></tr>
+    </table>
+  </div>
+
+  <h3>12-Month Affiliate Income Log</h3>
+  <table class="table">
+    <tr><th>Month</th><th>Total earnings (£)</th><th>Top earner</th><th>New programmes</th><th>Notes</th></tr>
+    <tr><td>January</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>February</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>March</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>April</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>May</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>June</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>July</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>August</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>September</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>October</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>November</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td>December</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+    <tr><td><strong>ANNUAL TOTAL</strong></td><td class="amount">£ ______</td><td></td><td></td><td></td></tr>
+  </table>
+</div>
+
+<!-- TAB 5: RECURRING INCOME -->
+<div class="section">
+  <h2>📈 Recurring Income Summary</h2>
+  <div class="tracker-section">
+    <div class="tracker-header">
+      <div class="tracker-title">All Income Streams</div>
+      <div class="tracker-total">Monthly total: £ ______</div>
+    </div>
+    <table class="table" style="margin:0">
+      <tr><th>Income stream</th><th>Type</th><th>Monthly (£)</th><th>Annual (£)</th><th>Active?</th></tr>
+      <tr><td class="empty">Affiliate commissions</td><td class="empty">Passive</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☑</td></tr>
+      <tr><td class="empty">Newsletter sponsorships</td><td class="empty">Active</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Digital product sales</td><td class="empty">Mixed</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Freelance / consulting</td><td class="empty">Active</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Staking / crypto yield</td><td class="empty">Passive</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td class="empty">Other</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">☐</td></tr>
+      <tr><td><strong>TOTAL INCOME</strong></td><td></td><td class="amount">£ ______</td><td class="amount">£ ______</td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- MONTHLY NET SUMMARY -->
+<div class="section">
+  <h2>📊 Monthly Net Summary</h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Income</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;margin-top:8px">
+        <tr><td style="padding:5px 0;color:#94a3b8">Affiliate income</td><td style="text-align:right;color:#22c55e;font-family:monospace">£ ______</td></tr>
+        <tr><td style="padding:5px 0;color:#94a3b8">Other income</td><td style="text-align:right;color:#22c55e;font-family:monospace">£ ______</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,0.08)"><td style="padding:8px 0 4px;color:#e2e8f0;font-weight:700">Total income</td><td style="text-align:right;color:#22c55e;font-family:monospace;font-weight:700">£ ______</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Costs</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;margin-top:8px">
+        <tr><td style="padding:5px 0;color:#94a3b8">Subscriptions</td><td style="text-align:right;color:#ef4444;font-family:monospace">£ ______</td></tr>
+        <tr><td style="padding:5px 0;color:#94a3b8">Tools / software</td><td style="text-align:right;color:#ef4444;font-family:monospace">£ ______</td></tr>
+        <tr><td style="padding:5px 0;color:#94a3b8">Advertising / promo</td><td style="text-align:right;color:#ef4444;font-family:monospace">£ ______</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,0.08)"><td style="padding:8px 0 4px;color:#e2e8f0;font-weight:700">Total costs</td><td style="text-align:right;color:#ef4444;font-family:monospace;font-weight:700">£ ______</td></tr>
+      </table>
+    </div>
+  </div>
+  <div style="margin-top:12px;background:#0d1a0d;border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center">
+    <span style="font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:#e2e8f0">Net monthly profit</span>
+    <span style="font-family:monospace;font-size:20px;font-weight:900;color:#22c55e">£ ______</span>
+  </div>
+</div>
+
+<!-- REVIEW CHECKLIST -->
+<div class="section">
+  <h2>✅ Monthly Review Checklist</h2>
+  <ul class="checklist">
+    <li>Update all crypto prices and recalculate portfolio value</li>
+    <li>Log affiliate earnings from each programme dashboard</li>
+    <li>Review subscription list — cancel anything unused</li>
+    <li>Check any wallets or accounts not reviewed in 30+ days</li>
+    <li>Compare net profit to last month — up or down? Why?</li>
+    <li>Set one financial goal for next month (e.g. add £X to crypto, cancel X subscriptions)</li>
+    <li>Back up seed phrases and wallet recovery details are secure</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>© 2026 DigiTech Lifestyle — <a href="https://www.digitechlifestyle.com">digitechlifestyle.com</a></p>
+  <p style="margin-top:6px">For educational purposes only. Not financial advice. Cryptocurrency involves significant risk.</p>
+</div>
+</body>
+</html>
