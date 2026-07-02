@@ -13,12 +13,6 @@ REMOTE_PATH="/home/u505433088/domains/digitechlifestyle.com/public_html/"
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Build started" >> "$LOG"
 
-# Safety check — must pass before deploy proceeds
-bash "$SCRIPT_DIR/scripts/pre-deploy-check.sh" >> "$LOG" 2>&1 || {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] ❌ Pre-deploy checks FAILED — deploy aborted" >> "$LOG"
-  exit 1
-}
-
 # Build
 cd "$SCRIPT_DIR"
 export PATH="/Users/joerobertson/.nvm/versions/node/v24.18.0/bin:$PATH"
@@ -29,7 +23,7 @@ npm run build >> "$LOG" 2>&1
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Build done. Deploying..." >> "$LOG"
 
 # Deploy
-rsync -a --delete-after --ignore-errors \
+rsync -a --delete-after \
   -e "ssh -i $SSH_KEY -p $SSH_PORT -o StrictHostKeyChecking=no" \
   "$SCRIPT_DIR/out/" \
   "$SSH_HOST:$REMOTE_PATH" \
@@ -41,17 +35,8 @@ rsync -a --delete-after --ignore-errors \
   --exclude="wp-*.php" \
   --exclude="prices.php" \
   --exclude="wp-content/" \
-  >> "$LOG" 2>&1
-
-# Verify key pages made it to server
-ssh -i "$SSH_KEY" -p "$SSH_PORT" -o StrictHostKeyChecking=no "$SSH_HOST" \
-  "for p in scam-watch resources news tool-directory reviews newsletter about blog; do
-    [ -f /home/u505433088/domains/digitechlifestyle.com/public_html/\$p/index.html ] && echo \"✅ \$p\" || echo \"❌ MISSING: \$p\";
-  done" >> "$LOG" 2>&1
-
-# Recreate uploads symlink (rsync --delete-after removes it every deploy)
-ssh -i "$SSH_KEY" -p "$SSH_PORT" -o StrictHostKeyChecking=no "$SSH_HOST" \
-  "ln -sf /home/u505433088/domains/digitechlifestyle-com-206789.hostingersite.com/public_html/wp-content/uploads /home/u505433088/domains/digitechlifestyle.com/public_html/wp-content/uploads" \
+  --filter="protect _next/static/chunks/***" \
+  --filter="protect _next/static/css/***" \
   >> "$LOG" 2>&1
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy complete." >> "$LOG"

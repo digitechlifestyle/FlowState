@@ -77,14 +77,14 @@ export default async function Home() {
             </p>
             <div className="home-hero-actions">
               <Link href="/blog" className="btn-primary">Read the Blog →</Link>
-              <Link href="/reviews" className="btn-secondary">Exchange Reviews</Link>
+              <Link href="/blog?category=Reviews" className="btn-secondary">Exchange Reviews</Link>
             </div>
           </div>
 
           {/* Stats — right column */}
           <div className="home-stats-col">
             <div className="stat-item">
-              <span className="stat-num">750+</span>
+              <span className="stat-num">100+</span>
               <span className="stat-label">Articles published</span>
             </div>
             <div className="stat-item">
@@ -98,54 +98,11 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Above-fold newsletter CTA */}
-        <div style={{ marginTop: "28px", padding: "16px 22px", background: "var(--bg-tint-amber-strong)", border: "1px solid oklch(73% 0.17 78 / 0.25)", borderRadius: "10px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
-          <div>
-            <p style={{ margin: 0, fontSize: "13px", fontWeight: 800, color: "var(--fg)" }}>📬 Free weekly newsletter for UK crypto &amp; AI readers</p>
-            <p style={{ margin: "2px 0 0", fontSize: "12px", color: "var(--muted)" }}>Every Thursday — plain English, no spam, unsubscribe any time.</p>
-          </div>
-          <Link href="/newsletter" style={{ display: "inline-block", background: "var(--amber)", color: "oklch(8% 0.015 60)", fontWeight: 800, fontSize: "12px", padding: "9px 18px", borderRadius: "7px", textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}>
-            Join free →
-          </Link>
-        </div>
-
-        {/* 3 Pathways */}
-        <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px", marginTop: "32px" }}>
-          {[
-            { icon: "₿", label: "Start with Crypto", desc: "Plain English guides for UK beginners — what to buy, where to buy it, and how to stay safe.", href: "/blog?category=Cryptocurrencies", color: "oklch(73% 0.17 78 / 0.15)", border: "oklch(73% 0.17 78 / 0.35)" },
-            { icon: "🤖", label: "Explore AI Tools", desc: "Free and paid AI tools tested for UK users — writing, research, video, and automation.", href: "/tool-directory", color: "var(--bg-tint-purple)", border: "oklch(55% 0.15 280 / 0.3)" },
-            { icon: "🛡️", label: "Avoid Scams", desc: "The most common crypto scams targeting UK investors right now — and how to spot them.", href: "/scam-watch", color: "var(--bg-tint-red)", border: "oklch(55% 0.15 25 / 0.3)" },
-          ].map((p) => (
-            <Link key={p.label} href={p.href} style={{ textDecoration: "none", padding: "20px 22px", background: p.color, border: `1px solid ${p.border}`, borderRadius: "12px", display: "block" }}>
-              <div style={{ fontSize: "22px", marginBottom: "8px" }}>{p.icon}</div>
-              <div style={{ fontSize: "14px", fontWeight: 800, color: "var(--fg)", marginBottom: "6px" }}>{p.label}</div>
-              <div style={{ fontSize: "12px", color: "var(--muted)", lineHeight: 1.55 }}>{p.desc}</div>
-            </Link>
-          ))}
-        </section>
-
-        {/* UK Comparison Guides — money page hub */}
-        <section style={{ marginTop: "28px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--amber)", margin: "0 0 12px" }}>UK Comparison Guides 2026</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "8px" }}>
-            {[
-              { label: "Best Crypto Exchanges UK", href: "/best-crypto-exchanges-uk" },
-              { label: "Best Hardware Wallets UK", href: "/best-hardware-wallets-uk" },
-              { label: "Best Crypto Tax Software", href: "/best-crypto-tax-software-uk" },
-              { label: "Beginner Crypto Toolkit", href: "/beginner-crypto-toolkit" },
-            ].map((g) => (
-              <Link key={g.href} href={g.href} style={{ display: "block", padding: "12px 16px", background: "var(--bg-card)", border: "1px solid var(--line)", borderRadius: "8px", textDecoration: "none", fontSize: "13px", fontWeight: 700, color: "var(--fg)" }}>
-                {g.label} →
-              </Link>
-            ))}
-          </div>
-        </section>
-
         {/* FREE FOR READERS */}
         <div className="free-strip">
           <div className="free-strip-label">Free for readers</div>
           <div className="free-strip-title">
-            7 free AI tools most people don&apos;t know exist — no paid plans needed.{" "}
+            6 free AI tools most people don&apos;t know exist — no paid plans needed.{" "}
             <Link href="/free-tools" style={{ color: "var(--amber)" }}>Get the free list →</Link>
           </div>
           <div className="topic-links">
@@ -157,7 +114,7 @@ export default async function Home() {
         </div>
 
         {/* ─── START HERE ─── */}
-        <section className="start-here-card" style={{ marginTop: "32px", padding: "20px 24px", background: "var(--bg-tint-blue)", border: "1px solid oklch(40% 0.04 240 / 0.3)", borderRadius: "12px" }}>
+        <section style={{ marginTop: "32px", padding: "20px 24px", background: "oklch(13% 0.02 240 / 0.6)", border: "1px solid oklch(40% 0.04 240 / 0.3)", borderRadius: "12px" }}>
           <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--amber)", marginBottom: "6px" }}>New here?</div>
           <h2 style={{ fontSize: "17px", fontWeight: 800, color: "var(--fg)", margin: "0 0 10px" }}>Start Here — Beginner&apos;s Guide to Crypto &amp; AI</h2>
           <p style={{ color: "var(--muted)", fontSize: "13px", margin: "0 0 14px", lineHeight: 1.55 }}>
@@ -179,7 +136,7 @@ export default async function Home() {
 
         {/* ─── CRYPTO SAFETY HUB + TOP AI TOOLS ─── */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginTop: "16px" }}>
-          <div className="hub-card hub-card-red" style={{ padding: "20px 22px", background: "var(--bg-tint-red-strong)", border: "1px solid oklch(55% 0.15 25 / 0.3)", borderRadius: "12px" }}>
+          <div style={{ padding: "20px 22px", background: "oklch(13% 0.03 25 / 0.5)", border: "1px solid oklch(55% 0.15 25 / 0.3)", borderRadius: "12px" }}>
             <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#f87171", marginBottom: "6px" }}>🔒 Crypto Safety Hub</div>
             <h3 style={{ fontSize: "15px", fontWeight: 800, color: "var(--fg)", margin: "0 0 8px" }}>Protect your crypto</h3>
             <p style={{ color: "var(--muted)", fontSize: "12px", margin: "0 0 12px", lineHeight: 1.55 }}>
@@ -187,7 +144,7 @@ export default async function Home() {
             </p>
             <Link href="/resources" className="read-more-link">Get the free security guide →</Link>
           </div>
-          <div className="hub-card hub-card-purple" style={{ padding: "20px 22px", background: "var(--bg-tint-purple)", border: "1px solid oklch(55% 0.15 280 / 0.3)", borderRadius: "12px" }}>
+          <div style={{ padding: "20px 22px", background: "oklch(13% 0.03 280 / 0.5)", border: "1px solid oklch(55% 0.15 280 / 0.3)", borderRadius: "12px" }}>
             <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(72% 0.18 280)", marginBottom: "6px" }}>🤖 Top AI Tools 2026</div>
             <h3 style={{ fontSize: "15px", fontWeight: 800, color: "var(--fg)", margin: "0 0 8px" }}>Best free AI tools right now</h3>
             <p style={{ color: "var(--muted)", fontSize: "12px", margin: "0 0 12px", lineHeight: 1.55 }}>
@@ -222,7 +179,7 @@ export default async function Home() {
                     {i === 3 && (
                       <div key="free-tools-strip" style={{
                         margin: "4px 0",
-                        background: "var(--bg-tint-amber-strong)",
+                        background: "oklch(14% 0.025 78 / 0.6)",
                         border: "1px solid oklch(73% 0.17 78 / 0.25)",
                         borderRadius: "10px",
                         padding: "16px 20px",
@@ -310,7 +267,7 @@ export default async function Home() {
         {/* Newsletter */}
         <div className="newsletter-strip">
           <h2>Stay ahead of the market — free</h2>
-          <p>Weekly crypto, DeFi, blockchain and AI insights for UK readers every Thursday. No spam.</p>
+          <p>Join 4,200+ readers getting weekly crypto, DeFi, blockchain and AI insights every Thursday. No spam.</p>
           <form className="newsletter-form" action="/newsletter" method="GET">
             <input type="email" name="email" placeholder="Enter your email address" required autoComplete="email" />
             <button type="submit">Join free</button>

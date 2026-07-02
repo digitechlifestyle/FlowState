@@ -124,89 +124,6 @@
   --radius: 8px;
   --radius-lg: 14px;
   --shadow: 0 2px 12px oklch(0% 0 0 / 0.50);
-
-  /* Tinted card backgrounds — used for coloured info/warning/promo boxes */
-  --bg-tint-amber:  oklch(14% 0.02 78 / 0.4);
-  --bg-tint-amber-strong: oklch(13% 0.03 78 / 0.5);
-  --bg-tint-blue:   oklch(13% 0.025 240 / 0.5);
-  --bg-tint-red:    oklch(13% 0.03 25 / 0.4);
-  --bg-tint-red-strong: oklch(13% 0.04 25 / 0.55);
-  --bg-tint-purple: oklch(13% 0.03 280 / 0.5);
-  --bg-tint-green:  oklch(13% 0.025 140 / 0.4);
-  --bg-tint-green-strong: oklch(13% 0.03 140 / 0.5);
-}
-
-/* ─── Light theme ─────────────────────────────────────────── */
-[data-theme="light"] {
-  color-scheme: light;
-
-  --bg:        oklch(98% 0.006 75);
-  --bg-panel:  oklch(95% 0.008 75);
-  --bg-card:   oklch(100% 0 0);
-  --fg:        oklch(15% 0.015 60);
-  --muted:     oklch(45% 0.012 65);
-  --line:      oklch(85% 0.010 70 / 0.70);
-
-  --amber:     oklch(62% 0.18 70);
-  --amber-dim: oklch(62% 0.18 70 / 0.15);
-
-  --purple:     oklch(45% 0.22 290);
-  --purple-dim: oklch(45% 0.22 290 / 0.12);
-  --purple-glow: 0 0 24px oklch(45% 0.22 290 / 0.25), 0 0 48px oklch(45% 0.22 290 / 0.10);
-
-  --background: oklch(98% 0.006 75);
-  --foreground: oklch(15% 0.015 60);
-  --accent:     oklch(62% 0.18 70);
-  --panel:      oklch(95% 0.008 75);
-  --blue:       oklch(62% 0.18 70);
-  --blue-dim:   oklch(62% 0.18 70 / 0.15);
-
-  --shadow: 0 2px 12px oklch(0% 0 0 / 0.10);
-
-  /* Tinted card backgrounds — light mode equivalents */
-  --bg-tint-amber:  oklch(97% 0.008 78);
-  --bg-tint-amber-strong: oklch(96% 0.012 78);
-  --bg-tint-blue:   oklch(95% 0.008 240);
-  --bg-tint-red:    oklch(97% 0.006 25);
-  --bg-tint-red-strong: oklch(96% 0.008 25);
-  --bg-tint-purple: oklch(95% 0.008 280);
-  --bg-tint-green:  oklch(96% 0.008 140);
-  --bg-tint-green-strong: oklch(95% 0.010 140);
-}
-
-/* ─── Light theme overrides for hardcoded Tailwind colours ─── */
-[data-theme="light"] .text-white,
-[data-theme="light"] h1.text-white,
-[data-theme="light"] h2.text-white {
-  color: var(--fg) !important;
-}
-
-/* Input fields in light mode */
-[data-theme="light"] input.text-white,
-[data-theme="light"] textarea.text-white {
-  color: var(--fg) !important;
-  background: var(--bg-card) !important;
-  border-color: var(--line) !important;
-}
-
-/* surface cards (bg-card already adapts, just ensure text readable) */
-[data-theme="light"] .surface {
-  background: var(--bg-card);
-  border-color: var(--line);
-}
-
-/* Homepage cards with hardcoded dark oklch backgrounds */
-[data-theme="light"] .start-here-card {
-  background: oklch(94% 0.01 240) !important;
-  border-color: oklch(80% 0.04 240 / 0.6) !important;
-}
-[data-theme="light"] .hub-card-red {
-  background: oklch(96% 0.01 25) !important;
-  border-color: oklch(80% 0.08 25 / 0.4) !important;
-}
-[data-theme="light"] .hub-card-purple {
-  background: oklch(95% 0.01 280) !important;
-  border-color: oklch(75% 0.08 280 / 0.4) !important;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -319,7 +236,7 @@ h1, h2, h3, h4, h5 {
 .site-nav a {
   font-size: 13px;
   font-weight: 600;
-  color: var(--fg);
+  color: var(--muted);
   padding: 5px 9px;
   border-radius: 6px;
   transition: color 0.13s, background 0.13s;
