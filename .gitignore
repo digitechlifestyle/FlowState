@@ -12,3 +12,11 @@ rtk/
 
 # Local Netlify folder
 .netlify
+
+# Separate repos — never commit these into FlowState
+digitechlifestyle/
+TribeConnect/
+.next/
+LivePortrait/
+OpenCut/
+crypto-mining-hub/

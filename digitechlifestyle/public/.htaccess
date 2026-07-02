@@ -1,6 +1,0 @@
-RewriteEngine On
-
-# Redirect wp-content requests to the WordPress Hostinger subdomain
-# (Next.js static export doesn't serve wp-content — WP images live on the subdomain)
-RewriteCond %{REQUEST_URI} ^/wp-content/
-RewriteRule ^wp-content/(.*)$ https://digitechlifestyle-com-206789.hostingersite.com/wp-content/$1 [R=302,L]
